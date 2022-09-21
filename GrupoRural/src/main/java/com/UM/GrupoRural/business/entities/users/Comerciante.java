@@ -1,4 +1,4 @@
-package com.UM.GrupoRural.entities.usuarios;
+package com.UM.GrupoRural.business.entities.users;
 
 public class Comerciante extends Usuario {
 

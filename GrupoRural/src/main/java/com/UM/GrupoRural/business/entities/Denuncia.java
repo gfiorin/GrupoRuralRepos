@@ -1,4 +1,4 @@
-package com.UM.GrupoRural.entities;
+package com.UM.GrupoRural.business.entities;
 
 import java.time.LocalDateTime;
 

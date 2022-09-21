@@ -1,4 +1,4 @@
-package com.UM.GrupoRural.entities.notificaciones;
+package com.UM.GrupoRural.business.entities.notifications;
 
 import java.time.LocalDateTime;
 
