@@ -35,4 +35,7 @@ public class Usuario {
         this.contraseña = contraseña;
     }
 
+    public Usuario() {
+
+    }
 }
