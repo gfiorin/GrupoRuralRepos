@@ -29,4 +29,10 @@ public class Usuario {
     @Column(name = "puntuacion", nullable = false)
     private int puntuacion;
 
+    public Usuario(String mail, String usuario, String contraseña) {
+        this.mail = mail;
+        this.usuario = usuario;
+        this.contraseña = contraseña;
+    }
+
 }
