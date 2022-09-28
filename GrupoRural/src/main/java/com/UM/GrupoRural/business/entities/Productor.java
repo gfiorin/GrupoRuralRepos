@@ -1,6 +1,6 @@
 package com.UM.GrupoRural.business.entities;
 
-import entities.usuarios.Usuario;
+import com.UM.GrupoRural.business.entities.users.Usuario;
 
 public class Productor extends Usuario {
 }
