@@ -38,4 +38,7 @@ public class Usuario {
     public Usuario() {
     }
 
+    public Usuario() {
+
+    }
 }
