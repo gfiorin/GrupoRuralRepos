@@ -19,6 +19,7 @@ public class DBLoader implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
         this.repository.save(new Usuario("A", "B", "C"));
+        print("Hola!");
     }
 
 }
