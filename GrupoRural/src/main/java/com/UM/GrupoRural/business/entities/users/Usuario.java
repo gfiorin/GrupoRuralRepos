@@ -18,7 +18,7 @@ public class Usuario {
     private String usuario;
 
     @Column(name = "contraseña", nullable = false)
-    private String contraseña;
+    private String contrasena;
 
     @Column(name = "latitud", nullable = false)
     private long latitud;
@@ -28,5 +28,14 @@ public class Usuario {
 
     @Column(name = "puntuacion", nullable = false)
     private int puntuacion;
+
+    public Usuario(String mail, String usuario, String contrasena) {
+        this.mail = mail;
+        this.usuario = usuario;
+        this.contrasena = contrasena;
+    }
+
+    public Usuario() {
+    }
 
 }
