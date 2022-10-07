@@ -7,19 +7,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.boot.CommandLineRunner;
 
 @Component
-public class DBLoader implements CommandLineRunner {
+public class DBAdminLoader implements CommandLineRunner {
 
     private final UserRepository repository;
 
     @Autowired
-    public DBLoader (UserRepository repository) {
+    public DBAdminLoader(UserRepository repository) {
         this.repository = repository;
     }
 
     @Override
     public void run(String... strings) throws Exception {
-        this.repository.save(new Usuario("A", "B", "C"));
-        print("Hola!");
+        this.repository.save(new Usuario("mailAdmin", "admin01", "Claveadmin01"));
     }
 
 }
