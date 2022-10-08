@@ -1,6 +1,6 @@
 package com.UM.GrupoRural;
 
-import com.UM.GrupoRural.business.entities.users.Usuario;
+import com.UM.GrupoRural.business.entidades.usuarios.Usuario;
 import com.UM.GrupoRural.persistence.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

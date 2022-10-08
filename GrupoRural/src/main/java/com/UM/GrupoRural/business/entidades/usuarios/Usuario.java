@@ -1,6 +1,9 @@
-package com.UM.GrupoRural.business.entities.users;
+package com.UM.GrupoRural.business.entidades.usuarios;
+
+import com.UM.GrupoRural.business.entidades.Denuncia;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -8,8 +11,9 @@ import javax.persistence.*;
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_usuario", nullable = false)
+    private Integer idUsuario;
 
     @Column(name = "mail", nullable = false)
     private String mail;
@@ -28,6 +32,14 @@ public class Usuario {
 
     @Column(name = "puntuacion", nullable = false)
     private int puntuacion;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "denunciante", fetch = FetchType.LAZY)
+    private Collection<Denuncia> denunciasRealizadas;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "denunciado", fetch = FetchType.LAZY)
+    private Collection<Denuncia> denunciasRecibidas;
+
+
 
     public Usuario(String mail, String usuario, String contrasena) {
         this.mail = mail;

@@ -1,4 +1,4 @@
-package com.UM.GrupoRural.business.entities.orders;
+package com.UM.GrupoRural.business.entidades.ordenes;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,7 +9,9 @@ import java.time.LocalDateTime;
 public class Orden {
 
     public enum Estado{ACEPTADA, PENDIENTE, CANCELADA, FINALIZADA}
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_orden")
     private int idOrden;
     @Column(name = "fecha", nullable = false)

@@ -1,4 +1,4 @@
-package com.UM.GrupoRural.business.exceptions;
+package com.UM.GrupoRural.business.excepciones;
 
 public class InvalidInformation extends Exception{
 

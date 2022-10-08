@@ -1,6 +1,5 @@
 package com.UM.GrupoRural.ui;
 
-import com.UM.GrupoRural.business.entities.users.Usuario;
 import com.UM.GrupoRural.business.managers.UserMgr;
 import org.springframework.stereotype.Controller;
 

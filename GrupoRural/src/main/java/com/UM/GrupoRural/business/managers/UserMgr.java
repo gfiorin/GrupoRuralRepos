@@ -1,7 +1,7 @@
 package com.UM.GrupoRural.business.managers;
 
-import com.UM.GrupoRural.business.entities.users.Usuario;
-import com.UM.GrupoRural.business.exceptions.InvalidInformation;
+import com.UM.GrupoRural.business.entidades.usuarios.Usuario;
+import com.UM.GrupoRural.business.excepciones.InvalidInformation;
 import com.UM.GrupoRural.persistence.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
