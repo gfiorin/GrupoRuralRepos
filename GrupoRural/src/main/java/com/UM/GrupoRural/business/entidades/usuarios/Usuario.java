@@ -39,8 +39,6 @@ public class Usuario {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "denunciado", fetch = FetchType.LAZY)
     private Collection<Denuncia> denunciasRecibidas;
 
-
-
     public Usuario(String mail, String usuario, String contrasena) {
         this.mail = mail;
         this.usuario = usuario;
@@ -48,6 +46,42 @@ public class Usuario {
     }
 
     public Usuario() {
+    }
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public long getLatitud() {
+        return latitud;
+    }
+
+    public long getLongitud() {
+        return longitud;
+    }
+
+    public int getPuntuacion() {
+        return puntuacion;
+    }
+
+    public Collection<Denuncia> getDenunciasRealizadas() {
+        return denunciasRealizadas;
+    }
+
+    public Collection<Denuncia> getDenunciasRecibidas() {
+        return denunciasRecibidas;
     }
 
 }
