@@ -1,9 +1,13 @@
 package com.UM.GrupoRural.ui;
 
+import com.UM.GrupoRural.business.entidades.usuarios.Comprador;
+import com.UM.GrupoRural.business.entidades.usuarios.Productor;
+import com.UM.GrupoRural.business.entidades.usuarios.Usuario;
+import com.UM.GrupoRural.business.excepciones.InvalidInformation;
 import com.UM.GrupoRural.business.managers.UserMgr;
 import org.springframework.stereotype.Controller;
 
-@Controller
+@Controller // o @Component?
 public class MainController {
 
     private final UserMgr userMgr;
@@ -12,7 +16,7 @@ public class MainController {
         this.userMgr = userMgr;
     }
 
-    void loginAction () throws Exception {
+    void loginAction () {
 
         /*
         if (falta alguno de los datos) {
@@ -22,13 +26,19 @@ public class MainController {
         */
 
         try {
-            //Usuario user = userMgr.userLogIn();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            Usuario user = userMgr.userLogIn("","");
+            if (user instanceof Comprador) {
+
+            }
+            else if (user instanceof Productor) {
+
+            }
+
+        } catch (InvalidInformation invalidInformation) {
+
         }
 
-
     }
-
 
 }

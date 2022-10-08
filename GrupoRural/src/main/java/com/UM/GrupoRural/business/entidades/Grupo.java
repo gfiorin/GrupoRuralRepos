@@ -24,7 +24,7 @@ public class Grupo {
 
     @Column(name = "area", nullable = false)
     private String area;
-    //private String historiaVentas;
+    //private String historialVentas;
 
     @Column(name = "numero_participantes", nullable = false)
     private int numeroparticipantes;
@@ -38,4 +38,5 @@ public class Grupo {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoOfertante", fetch = FetchType.LAZY)
     private Collection<OfertaDeVenta> ofertasDeVenta;
+
 }

@@ -1,12 +1,17 @@
 package com.UM.GrupoRural.business.managers;
 
+import com.UM.GrupoRural.business.entidades.usuarios.Comprador;
+import com.UM.GrupoRural.business.entidades.usuarios.Productor;
 import com.UM.GrupoRural.business.entidades.usuarios.Usuario;
 import com.UM.GrupoRural.business.excepciones.InvalidInformation;
+import com.UM.GrupoRural.business.excepciones.UserAlreadyExists;
 import com.UM.GrupoRural.persistence.CompradorRepository;
 import com.UM.GrupoRural.persistence.ProductorRepository;
 import com.UM.GrupoRural.persistence.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 
 @Service
 public class UserMgr {
@@ -21,12 +26,64 @@ public class UserMgr {
         this.productorRepository = productorRepository;
     }
 
-    //public void agregarComprador (String nombre, String )
+    public void agregarUsuario (String nombre_completo, String mail, String telefono, String cedula, String usuario, String contrasena, LocalDate fecha_de_nacimiento, Boolean tipo_usuario_productor) throws InvalidInformation, UserAlreadyExists {
 
+        if (nombre_completo == null || nombre_completo.isBlank()){
+            throw new InvalidInformation("Por favor, ingrese un nombre válido.");
+        }
 
+        if (mail == null || mail.isBlank()){
+            throw new InvalidInformation("Por favor, ingrese un nombre de usuario válido.");
+        }
 
+        if (usuario == null || usuario.isBlank()){
+            throw new InvalidInformation("Por favor, ingrese un email válido.");
+        }
 
+        if (contrasena == null || contrasena.isBlank() || contrasena.length() < 6){
+            throw new InvalidInformation("La clave debe tener al menos 6 caracteres.");
+        }
 
+        if (cedula == null || cedula.isBlank()) {
+            throw new InvalidInformation("Por favor, ingrese una cédula válido.");
+        }
+
+        if (fecha_de_nacimiento == null){
+            throw new InvalidInformation("Por favor, ingrese una fecha de nacimiento válida.");
+        }
+
+        if (telefono == null || telefono.isBlank()){
+            throw new InvalidInformation("Por favor, ingrese un telefono válido.");
+        }
+
+        if (tipo_usuario_productor == null) {
+            throw new InvalidInformation("Por favor, seleccione el tipo de perfil que desea crear.");
+        }
+
+        for (char ch: nombre_completo.toCharArray()) {
+            if(Character.isDigit(ch)){
+                throw new InvalidInformation("El nombre no puede contener números.");
+            }
+        }
+
+        if (userRepository.findOneByMail(mail) != null) {
+            throw new UserAlreadyExists("El email ya ha sido registrado en el sistema.");
+        }
+
+        if (userRepository.findOneByUsuario(usuario) != null) {
+            throw new UserAlreadyExists("El nombre de usuario ya ha sido registrado en el sistema.");
+        }
+
+        if (tipo_usuario_productor) {
+            Productor productor = new Productor(nombre_completo, mail, telefono, cedula, usuario, contrasena, fecha_de_nacimiento);
+            productorRepository.save(productor);
+        }
+        else {
+            Comprador comprador = new Comprador(nombre_completo, mail, telefono, cedula, usuario, contrasena, fecha_de_nacimiento);
+            compradorRepository.save(comprador);
+        }
+
+    }
 
     @Transactional
     public Usuario userLogIn(String emailOrUsername, String password) throws InvalidInformation {
