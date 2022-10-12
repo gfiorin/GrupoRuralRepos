@@ -1,4 +1,4 @@
-package com.UM.GrupoRural.business.entidades.ordenes;
+package com.UM.GrupoRural.business.entities.ordenes;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

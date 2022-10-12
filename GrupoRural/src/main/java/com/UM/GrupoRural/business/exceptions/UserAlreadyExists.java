@@ -1,4 +1,4 @@
-package com.UM.GrupoRural.business.excepciones;
+package com.UM.GrupoRural.business.exceptions;
 
 public class UserAlreadyExists extends Exception{
 

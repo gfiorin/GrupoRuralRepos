@@ -1,4 +1,4 @@
-package com.UM.GrupoRural.business.entidades;
+package com.UM.GrupoRural.business.entities;
 
 import javax.persistence.*;
 

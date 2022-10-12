@@ -1,9 +1,9 @@
 package com.UM.GrupoRural.ui;
 
-import com.UM.GrupoRural.business.entidades.usuarios.Comprador;
-import com.UM.GrupoRural.business.entidades.usuarios.Productor;
-import com.UM.GrupoRural.business.entidades.usuarios.Usuario;
-import com.UM.GrupoRural.business.excepciones.InvalidInformation;
+import com.UM.GrupoRural.business.entities.users.Comprador;
+import com.UM.GrupoRural.business.entities.users.Productor;
+import com.UM.GrupoRural.business.entities.users.Usuario;
+import com.UM.GrupoRural.business.exceptions.InvalidInformation;
 import com.UM.GrupoRural.business.managers.UserMgr;
 import org.springframework.stereotype.Controller;
 

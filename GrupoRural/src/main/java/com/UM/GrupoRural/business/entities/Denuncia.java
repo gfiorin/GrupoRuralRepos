@@ -1,6 +1,6 @@
-package com.UM.GrupoRural.business.entidades;
+package com.UM.GrupoRural.business.entities;
 
-import com.UM.GrupoRural.business.entidades.usuarios.Usuario;
+import com.UM.GrupoRural.business.entities.users.Usuario;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

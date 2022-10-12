@@ -1,7 +1,7 @@
-package com.UM.GrupoRural.business.entidades.usuarios;
+package com.UM.GrupoRural.business.entities.users;
 
-import com.UM.GrupoRural.business.entidades.ofertas.OfertaDeCompra;
-import com.UM.GrupoRural.business.entidades.ordenes.OrdenCompraGanado;
+import com.UM.GrupoRural.business.entities.ofertas.OfertaDeCompra;
+import com.UM.GrupoRural.business.entities.ordenes.OrdenCompraGanado;
 
 import javax.persistence.*;
 import java.time.LocalDate;

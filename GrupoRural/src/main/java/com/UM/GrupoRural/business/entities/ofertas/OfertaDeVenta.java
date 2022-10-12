@@ -1,8 +1,8 @@
-package com.UM.GrupoRural.business.entidades.ofertas;
+package com.UM.GrupoRural.business.entities.ofertas;
 
-import com.UM.GrupoRural.business.entidades.Grupo;
-import com.UM.GrupoRural.business.entidades.Transaccion;
-import com.UM.GrupoRural.business.entidades.ordenes.OrdenCompraGanado;
+import com.UM.GrupoRural.business.entities.Grupo;
+import com.UM.GrupoRural.business.entities.Transaccion;
+import com.UM.GrupoRural.business.entities.ordenes.OrdenCompraGanado;
 
 
 import javax.persistence.*;

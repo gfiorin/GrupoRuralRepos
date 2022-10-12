@@ -1,6 +1,6 @@
 package com.UM.GrupoRural.persistence;
 
-import com.UM.GrupoRural.business.entidades.ordenes.OrdenCompraGanado;
+import com.UM.GrupoRural.business.entities.ordenes.OrdenCompraGanado;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

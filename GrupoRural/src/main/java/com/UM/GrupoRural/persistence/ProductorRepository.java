@@ -1,6 +1,6 @@
 package com.UM.GrupoRural.persistence;
 
-import com.UM.GrupoRural.business.entidades.usuarios.Productor;
+import com.UM.GrupoRural.business.entities.users.Productor;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
