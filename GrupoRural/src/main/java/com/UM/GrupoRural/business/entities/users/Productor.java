@@ -20,5 +20,8 @@ public class Productor extends Usuario {
         this.grupos = grupos;
     }
 
+    public Productor() {
+
+    }
 }
 

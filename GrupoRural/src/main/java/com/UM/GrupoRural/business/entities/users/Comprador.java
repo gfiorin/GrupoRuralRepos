@@ -22,4 +22,7 @@ public class Comprador extends Usuario {
         super(nombre_completo, mail, telefono, cedula, usuario, contrasena, fecha_de_nacimiento);
     }
 
+    public Comprador() {
+
+    }
 }
