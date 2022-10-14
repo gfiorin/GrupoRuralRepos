@@ -26,7 +26,7 @@ public class UserMgr {
         this.productorRepository = productorRepository;
     }
 
-    public void agregarUsuario (String nombre_completo, String mail, String telefono, String cedula, String usuario, String contrasena, LocalDate fecha_de_nacimiento, Boolean tipo_usuario_productor) throws InvalidInformation, UserAlreadyExists {
+    public void agregarUsuario (String nombre_completo, String mail, String telefono, String cedula, String usuario, String contrasena, LocalDate fecha_de_nacimiento, Integer tipo_usuario_productor) throws InvalidInformation, UserAlreadyExists {
 
         if (nombre_completo == null || nombre_completo.isBlank()){
             throw new InvalidInformation("Por favor, ingrese un nombre válido.");
@@ -74,7 +74,7 @@ public class UserMgr {
             throw new UserAlreadyExists("El nombre de usuario ya ha sido registrado en el sistema.");
         }
 
-        if (tipo_usuario_productor) {
+        if (tipo_usuario_productor == 0) {
             Productor productor = new Productor(nombre_completo, mail, telefono, cedula, usuario, contrasena, fecha_de_nacimiento);
             productorRepository.save(productor);
         }
@@ -104,6 +104,14 @@ public class UserMgr {
             throw new InvalidInformation("Contraseña incorrecta");
         }
 
+    }
+
+    public Boolean existsByUsuario(String usuario) {
+        return userRepository.existsByUsuario(usuario);
+    }
+
+    public Boolean existsByMail(String mail) {
+        return userRepository.existsByMail(mail);
     }
 
 }

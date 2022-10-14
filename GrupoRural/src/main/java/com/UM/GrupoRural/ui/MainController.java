@@ -5,9 +5,11 @@ import com.UM.GrupoRural.business.entities.users.Productor;
 import com.UM.GrupoRural.business.entities.users.Usuario;
 import com.UM.GrupoRural.business.exceptions.InvalidInformation;
 import com.UM.GrupoRural.business.managers.UserMgr;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller // o @Component?
+@RestController
+@RequestMapping("/api/auth")
 public class MainController {
 
     private final UserMgr userMgr;

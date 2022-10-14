@@ -46,6 +46,8 @@ public class Usuario {
     @Column(name = "puntuacion", nullable = false)
     private int puntuacion;
 
+    private Integer tipo_de_usuario;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "denunciante", fetch = FetchType.LAZY)
     private Collection<Denuncia> denunciasRealizadas;
 
@@ -114,6 +116,14 @@ public class Usuario {
 
     public Collection<Denuncia> getDenunciasRecibidas() {
         return denunciasRecibidas;
+    }
+
+    public Integer getTipo_de_usuario() {
+        return tipo_de_usuario;
+    }
+
+    public void setTipo_de_usuario(Integer tipo_de_usuario) {
+        this.tipo_de_usuario = tipo_de_usuario;
     }
 
 }
