@@ -61,6 +61,7 @@ public class Usuario {
         this.cedula = cedula;
         this.usuario = usuario;
         this.contrasena = contrasena;
+        this.fecha_de_nacimiento = fecha_de_nacimiento;
     }
 
     public Usuario() {

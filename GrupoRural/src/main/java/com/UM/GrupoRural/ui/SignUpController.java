@@ -48,7 +48,7 @@ public class SignUpController {
             invalidInformation.printStackTrace();
         }
 
-        return ResponseEntity.ok(new MessageResponse("Userio registrado correctamente!"));
+        return ResponseEntity.ok(new MessageResponse("Usuario registrado correctamente!"));
 
     }
 
