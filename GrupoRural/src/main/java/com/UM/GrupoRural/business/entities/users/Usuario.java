@@ -19,16 +19,16 @@ public class Usuario {
     @Column(name = "nombre_completo", nullable = false)
     private String nombre_completo;
 
-    @Column(name = "mail", nullable = false)
+    @Column(name = "mail", nullable = false, unique = true)
     private String mail;
 
-    @Column(name = "telefono", nullable = false)
+    @Column(name = "telefono", nullable = false, unique = true)
     private String telefono;
 
-    @Column(name = "cedula", nullable = false)
+    @Column(name = "cedula", nullable = false, unique = true)
     private String cedula;
 
-    @Column(name = "usuario", nullable = false)
+    @Column(name = "usuario", nullable = false, unique = true)
     private String usuario;
 
     @Column(name = "contraseña", nullable = false)
@@ -37,10 +37,10 @@ public class Usuario {
     @Column(name = "fecha_de_nacimiento", nullable = false)
     private LocalDate fecha_de_nacimiento;
     // todo cambiaria latitud y longitud por departamento y calle
-    @Column(name = "latitud", nullable = false)
+    @Column(name = "latitud", nullable = false, unique = true)
     private long latitud;
 
-    @Column(name = "longitud", nullable = false)
+    @Column(name = "longitud", nullable = false, unique = true)
     private long longitud;
 
     @Column(name = "puntuacion", nullable = false)

@@ -8,6 +8,8 @@ import com.UM.GrupoRural.business.exceptions.UserAlreadyExists;
 import com.UM.GrupoRural.persistence.CompradorRepository;
 import com.UM.GrupoRural.persistence.ProductorRepository;
 import com.UM.GrupoRural.persistence.UserRepository;
+import com.UM.GrupoRural.ui.messages.MessageResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,6 +68,14 @@ public class UserMgr {
             }
         }
 
+        if (userRepository.existsByUsuario(usuario)) {
+            throw new InvalidInformation("Error: El nombre de usuario ya esta en uso!");
+        }
+
+        if (userRepository.existsByMail(mail)) {
+            throw new InvalidInformation("Error: El mail ya esta en uso!");
+        }
+
         if (userRepository.findOneByMail(mail) != null) {
             throw new UserAlreadyExists("El email ya ha sido registrado en el sistema.");
         }
@@ -93,7 +103,7 @@ public class UserMgr {
         if (usuario == null) {
             usuario = userRepository.findOneByUsuario(emailOrUsername);
             if (usuario == null) {
-                throw new InvalidInformation("El usuario no existe");
+                throw new InvalidInformation("El usuario no esta registrado en el sistema");
             }
         }
 
