@@ -28,7 +28,7 @@ public class UserMgr {
         this.productorRepository = productorRepository;
     }
 
-    public void agregarUsuario (String nombre_completo, String mail, String telefono, String cedula, String usuario, String contrasena, LocalDate fecha_de_nacimiento, Integer tipo_usuario_productor) throws InvalidInformation, UserAlreadyExists {
+    public void agregarUsuario (String nombre_completo, String mail, String telefono, String cedula, String usuario, String contrasena, LocalDate fecha_de_nacimiento, Integer tipo_de_usuario) throws InvalidInformation, UserAlreadyExists {
 
         if (nombre_completo == null || nombre_completo.isBlank()){
             throw new InvalidInformation("Por favor, ingrese un nombre válido.");
@@ -58,7 +58,7 @@ public class UserMgr {
             throw new InvalidInformation("Por favor, ingrese un telefono válido.");
         }
 
-        if (tipo_usuario_productor == null) {
+        if (tipo_de_usuario == null) {
             throw new InvalidInformation("Por favor, seleccione el tipo de perfil que desea crear.");
         }
 
@@ -84,7 +84,7 @@ public class UserMgr {
             throw new UserAlreadyExists("El nombre de usuario ya ha sido registrado en el sistema.");
         }
 
-        if (tipo_usuario_productor == 0) {
+        if (tipo_de_usuario == 0) {
             Productor productor = new Productor(nombre_completo, mail, telefono, cedula, usuario, contrasena, fecha_de_nacimiento);
             productorRepository.save(productor);
         }

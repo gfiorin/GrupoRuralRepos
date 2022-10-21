@@ -1,19 +1,18 @@
-package com.UM.GrupoRural.ui.messages;
+package com.UM.GrupoRural.ui;
 
 
 import com.UM.GrupoRural.business.entities.users.Usuario;
 import com.UM.GrupoRural.business.exceptions.InvalidInformation;
 import com.UM.GrupoRural.business.managers.UserMgr;
+import com.UM.GrupoRural.ui.messages.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/SignIn")
+@CrossOrigin("http://localhost:3000")
 public class SignInController {
 
     @Autowired

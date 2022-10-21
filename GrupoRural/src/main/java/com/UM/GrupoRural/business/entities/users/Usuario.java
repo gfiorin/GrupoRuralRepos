@@ -46,6 +46,7 @@ public class Usuario {
     @Column(name = "puntuacion", nullable = false)
     private int puntuacion;
 
+    @Transient
     private Integer tipo_de_usuario;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "denunciante", fetch = FetchType.LAZY)
