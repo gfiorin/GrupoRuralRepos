@@ -2,6 +2,7 @@ package com.UM.GrupoRural.business.entities;
 
 
 import com.UM.GrupoRural.business.entities.ordenes.OrdenVentaGanado;
+import com.UM.GrupoRural.business.entities.users.Usuario;
 
 import javax.persistence.*;
 
@@ -23,6 +24,10 @@ public class Imagen {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_orden_venta_primaria", referencedColumnName = "id_orden")
     private OrdenVentaGanado ordenVentaGanadoPrimaria;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario", referencedColumnName = "id_usuario")
+    private Usuario usuario;
 
     public Imagen() {
     }
