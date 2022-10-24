@@ -36,12 +36,15 @@ public class Usuario {
 
     @Column(name = "fecha_de_nacimiento", nullable = false)
     private LocalDate fecha_de_nacimiento;
-    // todo cambiaria latitud y longitud por departamento y calle
-    @Column(name = "latitud", nullable = false)
-    private long latitud;
 
-    @Column(name = "longitud", nullable = false)
-    private long longitud;
+    @Column(name = "departamento", nullable = false, unique = true)
+    private String departamento;
+
+    @Column(name = "ciudad", nullable = false, unique = true)
+    private String ciudad;
+
+    @Column(name = "calle_y_numero", nullable = false)
+    private String calle_y_numero;
 
     @Column(name = "puntuacion", nullable = false)
     private int puntuacion;
@@ -88,6 +91,18 @@ public class Usuario {
         return cedula;
     }
 
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public String getCalle_y_numero() {
+        return calle_y_numero;
+    }
+
     public String getUsuario() {
         return usuario;
     }
@@ -98,18 +113,6 @@ public class Usuario {
 
     public LocalDate getFecha_de_nacimiento() {
         return fecha_de_nacimiento;
-    }
-
-    public long getLatitud() {
-        return latitud;
-    }
-
-    public long getLongitud() {
-        return longitud;
-    }
-
-    public int getPuntuacion() {
-        return puntuacion;
     }
 
     public Collection<Denuncia> getDenunciasRealizadas() {
