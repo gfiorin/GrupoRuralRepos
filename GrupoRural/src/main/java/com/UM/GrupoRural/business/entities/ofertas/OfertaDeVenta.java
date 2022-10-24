@@ -1,6 +1,6 @@
 package com.UM.GrupoRural.business.entities.ofertas;
 
-import com.UM.GrupoRural.business.entities.Grupo;
+import com.UM.GrupoRural.business.entities.grupos.Grupo;
 import com.UM.GrupoRural.business.entities.Transaccion;
 import com.UM.GrupoRural.business.entities.ordenes.OrdenCompraGanado;
 

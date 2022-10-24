@@ -127,4 +127,12 @@ public class UserMgr {
         return userRepository.existsByMail(mail);
     }
 
+    public Usuario findOneByMail(String mail) {
+        return userRepository.findOneByMail(mail);
+    }
+
+    public Usuario findOneByUsuario(String usuario) {
+        return userRepository.findOneByUsuario(usuario);
+    }
+
 }
