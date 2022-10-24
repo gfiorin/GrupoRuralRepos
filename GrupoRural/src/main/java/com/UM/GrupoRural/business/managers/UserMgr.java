@@ -8,6 +8,8 @@ import com.UM.GrupoRural.business.exceptions.UserAlreadyExists;
 import com.UM.GrupoRural.persistence.CompradorRepository;
 import com.UM.GrupoRural.persistence.ProductorRepository;
 import com.UM.GrupoRural.persistence.UserRepository;
+import com.UM.GrupoRural.ui.messages.MessageResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +28,7 @@ public class UserMgr {
         this.productorRepository = productorRepository;
     }
 
-    public void agregarUsuario (String nombre_completo, String mail, String telefono, String cedula, String usuario, String contrasena, LocalDate fecha_de_nacimiento, Integer tipo_usuario_productor) throws InvalidInformation, UserAlreadyExists {
+    public void agregarUsuario (String nombre_completo, String mail, String telefono, String cedula, String usuario, String contrasena, LocalDate fecha_de_nacimiento, Integer tipo_de_usuario) throws InvalidInformation, UserAlreadyExists {
 
         if (nombre_completo == null || nombre_completo.isBlank()){
             throw new InvalidInformation("Por favor, ingrese un nombre válido.");
@@ -56,7 +58,7 @@ public class UserMgr {
             throw new InvalidInformation("Por favor, ingrese un telefono válido.");
         }
 
-        if (tipo_usuario_productor == null) {
+        if (tipo_de_usuario == null) {
             throw new InvalidInformation("Por favor, seleccione el tipo de perfil que desea crear.");
         }
 
@@ -64,6 +66,14 @@ public class UserMgr {
             if(Character.isDigit(ch)){
                 throw new InvalidInformation("El nombre no puede contener números.");
             }
+        }
+
+        if (userRepository.existsByUsuario(usuario)) {
+            throw new InvalidInformation("Error: El nombre de usuario ya esta en uso!");
+        }
+
+        if (userRepository.existsByMail(mail)) {
+            throw new InvalidInformation("Error: El mail ya esta en uso!");
         }
 
         if (userRepository.findOneByMail(mail) != null) {
@@ -74,7 +84,7 @@ public class UserMgr {
             throw new UserAlreadyExists("El nombre de usuario ya ha sido registrado en el sistema.");
         }
 
-        if (tipo_usuario_productor == 0) {
+        if (tipo_de_usuario == 0) {
             Productor productor = new Productor(nombre_completo, mail, telefono, cedula, usuario, contrasena, fecha_de_nacimiento);
             productorRepository.save(productor);
         }
@@ -93,7 +103,7 @@ public class UserMgr {
         if (usuario == null) {
             usuario = userRepository.findOneByUsuario(emailOrUsername);
             if (usuario == null) {
-                throw new InvalidInformation("El usuario no existe");
+                throw new InvalidInformation("El usuario no esta registrado en el sistema");
             }
         }
 
