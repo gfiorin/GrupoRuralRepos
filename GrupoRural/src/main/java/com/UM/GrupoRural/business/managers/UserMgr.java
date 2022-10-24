@@ -100,6 +100,9 @@ public class UserMgr {
 
         Usuario usuario = userRepository.findOneByMail(emailOrUsername);
 
+        System.out.println(emailOrUsername);
+        System.out.println(password);
+
         if (usuario == null) {
             usuario = userRepository.findOneByUsuario(emailOrUsername);
             if (usuario == null) {

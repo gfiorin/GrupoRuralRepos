@@ -46,6 +46,9 @@ public class Usuario {
     @Column(name = "calle_y_numero", nullable = false)
     private String calle_y_numero;
 
+    @Column(name = "puntuacion", nullable = false)
+    private int puntuacion;
+
     @Transient
     private Integer tipo_de_usuario;
 
