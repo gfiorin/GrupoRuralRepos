@@ -3,6 +3,7 @@ package com.UM.GrupoRural.business.managers;
 import com.UM.GrupoRural.business.entities.users.Comprador;
 import com.UM.GrupoRural.business.entities.users.Productor;
 import com.UM.GrupoRural.business.entities.users.Usuario;
+import com.UM.GrupoRural.business.exceptions.EmailAlreadyExists;
 import com.UM.GrupoRural.business.exceptions.InvalidInformation;
 import com.UM.GrupoRural.business.exceptions.UserAlreadyExists;
 import com.UM.GrupoRural.persistence.CompradorRepository;
@@ -28,8 +29,7 @@ public class UserMgr {
         this.productorRepository = productorRepository;
     }
 
-    public void agregarUsuario (String nombre_completo, String mail, String telefono, String cedula, String usuario, String contrasena, LocalDate fecha_de_nacimiento, Integer tipo_de_usuario) throws InvalidInformation, UserAlreadyExists {
-
+    public void agregarUsuario (String nombre_completo, String mail, String telefono, String cedula, String usuario, String contrasena, LocalDate fecha_de_nacimiento, Integer tipo_de_usuario) throws InvalidInformation, UserAlreadyExists, EmailAlreadyExists {
         if (nombre_completo == null || nombre_completo.isBlank()){
             throw new InvalidInformation("Por favor, ingrese un nombre válido.");
         }
@@ -69,15 +69,15 @@ public class UserMgr {
         }
 
         if (userRepository.existsByUsuario(usuario)) {
-            throw new InvalidInformation("Error: El nombre de usuario ya esta en uso!");
+            throw new UserAlreadyExists("Error: El nombre de usuario ya esta en uso!");
         }
 
         if (userRepository.existsByMail(mail)) {
-            throw new InvalidInformation("Error: El mail ya esta en uso!");
+            throw new EmailAlreadyExists("Error: El mail ya esta en uso!");
         }
 
         if (userRepository.findOneByMail(mail) != null) {
-            throw new UserAlreadyExists("El email ya ha sido registrado en el sistema.");
+            throw new EmailAlreadyExists("El email ya ha sido registrado en el sistema.");
         }
 
         if (userRepository.findOneByUsuario(usuario) != null) {

@@ -37,16 +37,16 @@ public class Usuario {
     @Column(name = "fecha_de_nacimiento", nullable = false)
     private LocalDate fecha_de_nacimiento;
 
-    @Column(name = "departamento", nullable = false, unique = true)
+    @Column(name = "departamento", nullable = true, unique = true)
     private String departamento;
 
-    @Column(name = "ciudad", nullable = false, unique = true)
+    @Column(name = "ciudad", nullable = true, unique = true)
     private String ciudad;
 
-    @Column(name = "calle_y_numero", nullable = false)
+    @Column(name = "calle_y_numero", nullable = true)
     private String calle_y_numero;
 
-    @Column(name = "puntuacion", nullable = false)
+    @Column(name = "puntuacion", nullable = true)
     private int puntuacion;
 
     @Transient
