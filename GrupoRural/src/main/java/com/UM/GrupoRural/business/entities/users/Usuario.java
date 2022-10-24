@@ -1,6 +1,7 @@
 package com.UM.GrupoRural.business.entities.users;
 
 import com.UM.GrupoRural.business.entities.Denuncia;
+import com.UM.GrupoRural.business.entities.Imagen;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -48,6 +49,9 @@ public class Usuario {
 
     @Column(name = "puntuacion", nullable = true)
     private int puntuacion;
+
+    @OneToOne(mappedBy = "usuario")
+    private Imagen fotoPerfil;
 
     @Transient
     private Integer tipo_de_usuario;

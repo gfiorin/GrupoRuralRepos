@@ -26,7 +26,6 @@ public class SignUpController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> registerUser(@RequestBody Usuario newUser) {
-
        // Create new user's account
         try {
             userMgr.agregarUsuario(newUser.getNombre_completo(), newUser.getMail(), newUser.getTelefono(), newUser.getCedula(), newUser.getUsuario(), newUser.getContrasena(), newUser.getFecha_de_nacimiento(), newUser.getTipo_de_usuario());
