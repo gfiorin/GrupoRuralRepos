@@ -37,10 +37,10 @@ public class Usuario {
     @Column(name = "fecha_de_nacimiento", nullable = false)
     private LocalDate fecha_de_nacimiento;
     // todo cambiaria latitud y longitud por departamento y calle
-    @Column(name = "latitud", nullable = false, unique = true)
+    @Column(name = "latitud", nullable = false)
     private long latitud;
 
-    @Column(name = "longitud", nullable = false, unique = true)
+    @Column(name = "longitud", nullable = false)
     private long longitud;
 
     @Column(name = "puntuacion", nullable = false)

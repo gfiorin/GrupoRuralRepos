@@ -21,13 +21,6 @@ public class SignInController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> logInUser(@RequestBody Usuario newUser) {
 
-        /* Ya esta controlado en UserMgr
-        if (!userMgr.existsByUsuario(newUser.getUsuario())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: El  nombre de usuario y/o la contraseña ingresados no es correcta"));
-        }*/
-
         try {
             userMgr.userLogIn(newUser.getMail(), newUser.getContrasena());
         } catch (InvalidInformation invalidInformation) {

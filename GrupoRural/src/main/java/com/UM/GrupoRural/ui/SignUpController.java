@@ -25,20 +25,7 @@ public class SignUpController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> registerUser(@RequestBody Usuario newUser) {
 
-        /* Ya esta controlado en el User Mgr
-        if (userMgr.existsByUsuario(newUser.getUsuario())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: El nombre de usuario ya esta en uso!"));
-        }
-
-        if (userMgr.existsByMail(newUser.getMail())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: El mail ya esta en uso!"));
-        }*/
-
-        // Create new user's account
+       // Create new user's account
         try {
             userMgr.agregarUsuario(newUser.getNombre_completo(), newUser.getMail(), newUser.getTelefono(), newUser.getCedula(), newUser.getUsuario(), newUser.getContrasena(), newUser.getFecha_de_nacimiento(), newUser.getTipo_de_usuario());
         } catch (UserAlreadyExists userAlreadyExists) {
