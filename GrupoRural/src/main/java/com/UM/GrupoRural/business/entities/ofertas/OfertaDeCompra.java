@@ -30,5 +30,4 @@ public class OfertaDeCompra {
     @JoinColumn(name = "id_transaccion", referencedColumnName = "id_transaccion")
     private Transaccion transaccion;
 
-
 }
