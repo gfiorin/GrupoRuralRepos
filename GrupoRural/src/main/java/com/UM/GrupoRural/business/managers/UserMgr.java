@@ -106,7 +106,7 @@ public class UserMgr {
         if (usuario == null) {
             usuario = userRepository.findOneByUsuario(emailOrUsername);
             if (usuario == null) {
-                throw new InvalidInformation("El usuario no esta registrado en el sistema");
+                throw new InvalidInformation("Usuario o contraseña incorrectos");
             }
         }
 
@@ -114,7 +114,7 @@ public class UserMgr {
             return usuario;
         }
         else {
-            throw new InvalidInformation("Contraseña incorrecta");
+            throw new InvalidInformation("Usuario o contraseña incorrectos");
         }
 
     }

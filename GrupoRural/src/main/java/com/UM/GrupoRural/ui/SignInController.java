@@ -3,9 +3,11 @@ package com.UM.GrupoRural.ui;
 
 import com.UM.GrupoRural.business.entities.users.Usuario;
 import com.UM.GrupoRural.business.exceptions.InvalidInformation;
+import com.UM.GrupoRural.business.exceptions.UserAlreadyExists;
 import com.UM.GrupoRural.business.managers.UserMgr;
 import com.UM.GrupoRural.ui.messages.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,10 +26,11 @@ public class SignInController {
         try {
             userMgr.userLogIn(newUser.getMail(), newUser.getContrasena());
         } catch (InvalidInformation invalidInformation) {
-            invalidInformation.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new MessageResponse("Error: ¡Usuario o contraseña incorrectos!"));
         }
 
-        return ResponseEntity.ok(new MessageResponse("Ingresando correctamente!")); //FIXME
+        return ResponseEntity.ok(new MessageResponse("Ingresado correctamente!"));
 
     }
 }
