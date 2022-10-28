@@ -32,8 +32,7 @@ public class Imagen {
     public Imagen() {
     }
 
-    public Imagen(Integer id, byte[] imageData) {
-        this.id = id;
+    public Imagen(byte[] imageData) {
         this.imageData = imageData;
     }
 

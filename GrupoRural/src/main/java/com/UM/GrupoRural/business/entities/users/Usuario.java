@@ -50,8 +50,13 @@ public class Usuario {
     @Column(name = "puntuacion", nullable = true)
     private int puntuacion;
 
-    @OneToOne(mappedBy = "usuario")
-    private Imagen fotoPerfil;
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Imagen foto_de_perfil;
+
+    @Transient
+    private String img;
+
+
 
     @Transient
     private Integer tipo_de_usuario;
@@ -135,4 +140,19 @@ public class Usuario {
         this.tipo_de_usuario = tipo_de_usuario;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public Imagen getFoto_de_perfil() {
+        return foto_de_perfil;
+    }
+
+    public void setFoto_de_perfil(Imagen foto_de_perfil) {
+        this.foto_de_perfil = foto_de_perfil;
+    }
 }

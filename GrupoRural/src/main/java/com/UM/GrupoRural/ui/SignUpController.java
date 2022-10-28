@@ -28,7 +28,7 @@ public class SignUpController {
     public ResponseEntity<?> registerUser(@RequestBody Usuario newUser) {
        // Create new user's account
         try {
-            userMgr.agregarUsuario(newUser.getNombre_completo(), newUser.getMail(), newUser.getTelefono(), newUser.getCedula(), newUser.getUsuario(), newUser.getContrasena(), newUser.getFecha_de_nacimiento(), newUser.getTipo_de_usuario());
+            userMgr.agregarUsuario(newUser.getNombre_completo(), newUser.getMail(), newUser.getTelefono(), newUser.getCedula(), newUser.getUsuario(), newUser.getContrasena(), newUser.getFecha_de_nacimiento(), newUser.getTipo_de_usuario(), newUser.getImg());
         } catch (UserAlreadyExists userAlreadyExists) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new MessageResponse("Error: ¡El nombre de usuario ya esta en uso!"));

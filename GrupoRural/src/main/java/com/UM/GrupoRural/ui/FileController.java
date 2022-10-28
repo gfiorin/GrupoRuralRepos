@@ -14,12 +14,12 @@ import java.util.logging.Logger;
 @CrossOrigin("http://localhost:3000")
 @RestController
 public class FileController {
-    private static final Logger logger = (Logger) LoggerFactory.getLogger(FileController.class);
+    /*private static final Logger logger = (Logger) LoggerFactory.getLogger(FileController.class);
 
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity uploadFile(@RequestParam MultipartFile file) {
         logger.info(String.format("File name '%s' uploaded successfully.", file.getOriginalFilename()));
         return ResponseEntity.ok().build();
-    }
+    }*/
 }
 

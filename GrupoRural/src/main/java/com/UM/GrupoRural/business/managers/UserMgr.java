@@ -1,5 +1,6 @@
 package com.UM.GrupoRural.business.managers;
 
+import com.UM.GrupoRural.business.entities.Imagen;
 import com.UM.GrupoRural.business.entities.users.Comprador;
 import com.UM.GrupoRural.business.entities.users.Productor;
 import com.UM.GrupoRural.business.entities.users.Usuario;
@@ -13,6 +14,9 @@ import com.UM.GrupoRural.ui.messages.MessageResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 import java.time.LocalDate;
 
@@ -29,7 +33,7 @@ public class UserMgr {
         this.productorRepository = productorRepository;
     }
 
-    public void agregarUsuario (String nombre_completo, String mail, String telefono, String cedula, String usuario, String contrasena, LocalDate fecha_de_nacimiento, Integer tipo_de_usuario) throws InvalidInformation, UserAlreadyExists, EmailAlreadyExists {
+    public void agregarUsuario (String nombre_completo, String mail, String telefono, String cedula, String usuario, String contrasena, LocalDate fecha_de_nacimiento, Integer tipo_de_usuario, String img) throws InvalidInformation, UserAlreadyExists, EmailAlreadyExists {
         if (nombre_completo == null || nombre_completo.isBlank()){
             throw new InvalidInformation("Por favor, ingrese un nombre válido.");
         }
@@ -90,7 +94,12 @@ public class UserMgr {
         }
         else {
             Comprador comprador = new Comprador(nombre_completo, mail, telefono, cedula, usuario, contrasena, fecha_de_nacimiento);
+            if (img!=null){
+                img = img.split(",")[1];
+                comprador.setFoto_de_perfil(new Imagen(Base64.getDecoder().decode(img.getBytes(StandardCharsets.UTF_8))));
+            }
             compradorRepository.save(comprador);
+
         }
 
     }
