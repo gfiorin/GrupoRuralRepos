@@ -2,6 +2,8 @@ package com.UM.GrupoRural.business.entities.users;
 
 import com.UM.GrupoRural.business.entities.Denuncia;
 import com.UM.GrupoRural.business.entities.Imagen;
+import com.UM.GrupoRural.business.entities.Transaccion;
+import com.UM.GrupoRural.business.entities.Ubicacion;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -38,14 +40,8 @@ public class Usuario {
     @Column(name = "fecha_de_nacimiento", nullable = false)
     private LocalDate fecha_de_nacimiento;
 
-    @Column(name = "departamento", nullable = true, unique = true)
-    private String departamento;
-
-    @Column(name = "ciudad", nullable = true, unique = true)
-    private String ciudad;
-
-    @Column(name = "calle_y_numero", nullable = true)
-    private String calle_y_numero;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.LAZY)
+    private Collection<Ubicacion> ubicaciones;
 
     @Column(name = "puntuacion", nullable = true)
     private int puntuacion;
@@ -98,18 +94,6 @@ public class Usuario {
 
     public String getCedula() {
         return cedula;
-    }
-
-    public String getDepartamento() {
-        return departamento;
-    }
-
-    public String getCiudad() {
-        return ciudad;
-    }
-
-    public String getCalle_y_numero() {
-        return calle_y_numero;
     }
 
     public String getUsuario() {
