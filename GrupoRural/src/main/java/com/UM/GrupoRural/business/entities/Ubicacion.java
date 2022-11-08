@@ -15,10 +15,10 @@ public class Ubicacion {
     @Column(name = "id_ubicacion", nullable = false)
     private Integer idUbicacion;
 
-    @Column(name = "departamento", nullable = true, unique = true)
+    @Column(name = "departamento", nullable = true)
     private String departamento;
 
-    @Column(name = "ciudad", nullable = true, unique = true)
+    @Column(name = "ciudad", nullable = true)
     private String ciudad;
 
     @Column(name = "calle_y_numero", nullable = true)

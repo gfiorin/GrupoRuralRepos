@@ -90,13 +90,17 @@ public class UserMgr {
 
         if (tipo_de_usuario == 0) {
             Productor productor = new Productor(nombre_completo, mail, telefono, cedula, usuario, contrasena, fecha_de_nacimiento);
+            if (img!=null){
+                img = img.split(",")[1];
+                productor.setFoto_de_perfil(new Imagen(Base64.getDecoder().decode(img.getBytes(StandardCharsets.UTF_8)), productor));
+            }
             productorRepository.save(productor);
         }
         else {
             Comprador comprador = new Comprador(nombre_completo, mail, telefono, cedula, usuario, contrasena, fecha_de_nacimiento);
             if (img!=null){
                 img = img.split(",")[1];
-                comprador.setFoto_de_perfil(new Imagen(Base64.getDecoder().decode(img.getBytes(StandardCharsets.UTF_8))));
+                comprador.setFoto_de_perfil(new Imagen(Base64.getDecoder().decode(img.getBytes(StandardCharsets.UTF_8)), comprador));
             }
             compradorRepository.save(comprador);
 

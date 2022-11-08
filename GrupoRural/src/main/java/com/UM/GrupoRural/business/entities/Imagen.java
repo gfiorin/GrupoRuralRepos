@@ -36,6 +36,11 @@ public class Imagen {
         this.imageData = imageData;
     }
 
+    public Imagen(byte[] imageData, Usuario user) {
+        this.imageData = imageData;
+        this.usuario = user;
+    }
+
     public void setImageData(byte[] imageData) {
         this.imageData = imageData;
     }
