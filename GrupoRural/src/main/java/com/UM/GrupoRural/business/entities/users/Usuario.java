@@ -7,6 +7,7 @@ import com.UM.GrupoRural.business.entities.Ubicacion;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -52,7 +53,15 @@ public class Usuario {
     @Transient
     private String img;
 
+    //Simplifico el envio de las ubicaciones con el registro
+    @Transient
+    private String departamentos;
 
+    @Transient
+    private String ciudad;
+
+    @Transient
+    private String direccion;
 
     @Transient
     private Integer tipo_de_usuario;
@@ -71,6 +80,7 @@ public class Usuario {
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.fecha_de_nacimiento = fecha_de_nacimiento;
+        this.ubicaciones = new ArrayList<>(5);
     }
 
     public Usuario() {
@@ -138,5 +148,19 @@ public class Usuario {
 
     public void setFoto_de_perfil(Imagen foto_de_perfil) {
         this.foto_de_perfil = foto_de_perfil;
+    }
+
+    public String getDepartamentos() {
+        return departamentos;
+    }
+    public String getCiudad() {
+        return ciudad;
+    }
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void agregarUbicacion(Ubicacion ub){
+        this.ubicaciones.add(ub);
     }
 }

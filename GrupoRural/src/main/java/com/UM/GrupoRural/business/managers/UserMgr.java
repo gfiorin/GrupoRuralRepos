@@ -1,6 +1,7 @@
 package com.UM.GrupoRural.business.managers;
 
 import com.UM.GrupoRural.business.entities.Imagen;
+import com.UM.GrupoRural.business.entities.Ubicacion;
 import com.UM.GrupoRural.business.entities.users.Comprador;
 import com.UM.GrupoRural.business.entities.users.Productor;
 import com.UM.GrupoRural.business.entities.users.Usuario;
@@ -33,13 +34,25 @@ public class UserMgr {
         this.productorRepository = productorRepository;
     }
 
-    public void agregarUsuario (String nombre_completo, String mail, String telefono, String cedula, String usuario, String contrasena, LocalDate fecha_de_nacimiento, Integer tipo_de_usuario, String img) throws InvalidInformation, UserAlreadyExists, EmailAlreadyExists {
+    public void agregarUsuario (String nombre_completo, String mail, String telefono, String cedula, String usuario, String contrasena, LocalDate fecha_de_nacimiento, Integer tipo_de_usuario, String img, String departamento, String ciudad, String direccion) throws InvalidInformation, UserAlreadyExists, EmailAlreadyExists {
         if (nombre_completo == null || nombre_completo.isBlank()){
             throw new InvalidInformation("Por favor, ingrese un nombre válido.");
         }
 
         if (mail == null || mail.isBlank()){
             throw new InvalidInformation("Por favor, ingrese un nombre de usuario válido.");
+        }
+
+        if (departamento == null || departamento.isBlank()){
+            throw new InvalidInformation("Por favor, ingrese un departamento válido.");
+        }
+
+        if (ciudad == null || ciudad.isBlank()){
+            throw new InvalidInformation("Por favor, ingrese una ciudad válida.");
+        }
+
+        if (direccion == null || direccion.isBlank()){
+            throw new InvalidInformation("Por favor, ingrese una direccion válida.");
         }
 
         if (usuario == null || usuario.isBlank()){
@@ -88,13 +101,18 @@ public class UserMgr {
             throw new UserAlreadyExists("El nombre de usuario ya ha sido registrado en el sistema.");
         }
 
+        //Genero creo la Ubicacion
+        Ubicacion ub = new Ubicacion(departamento, ciudad, direccion);
+
         if (tipo_de_usuario == 0) {
             Productor productor = new Productor(nombre_completo, mail, telefono, cedula, usuario, contrasena, fecha_de_nacimiento);
             if (img!=null){
                 img = img.split(",")[1];
                 productor.setFoto_de_perfil(new Imagen(Base64.getDecoder().decode(img.getBytes(StandardCharsets.UTF_8)), productor));
             }
-            productorRepository.save(productor);
+            ub.asociarUsuario(productor);
+            productor.agregarUbicacion(ub);
+            productorRepository.save(productor); // Aparentemente ya me persiste la ubicacion
         }
         else {
             Comprador comprador = new Comprador(nombre_completo, mail, telefono, cedula, usuario, contrasena, fecha_de_nacimiento);
@@ -102,6 +120,8 @@ public class UserMgr {
                 img = img.split(",")[1];
                 comprador.setFoto_de_perfil(new Imagen(Base64.getDecoder().decode(img.getBytes(StandardCharsets.UTF_8)), comprador));
             }
+            ub.asociarUsuario(comprador);
+            comprador.agregarUbicacion(ub);
             compradorRepository.save(comprador);
 
         }

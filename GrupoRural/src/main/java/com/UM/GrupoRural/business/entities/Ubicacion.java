@@ -32,5 +32,17 @@ public class Ubicacion {
     @JoinTable(name = "ubicaciones_lotes", joinColumns = @JoinColumn(name = "id_ubicacion", referencedColumnName = "id_ubicacion"), inverseJoinColumns = @JoinColumn(name = "id_lote_ganado", referencedColumnName = "id_ganado"))
     private Collection<LoteGanado> lotes;
 
+    public Ubicacion() {
+    }
 
+    public Ubicacion(String departamento, String ciudad, String calle_y_numero) {
+        this.departamento = departamento;
+        this.ciudad = ciudad;
+        this.calle_y_numero = calle_y_numero;
+    }
+
+
+    public void asociarUsuario(Usuario usuario){
+        this.usuario=usuario;
+    }
 }
