@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GroupRepository extends CrudRepository<Grupo, Integer> {
+    Grupo findByNombre(String nombre);
+
 }

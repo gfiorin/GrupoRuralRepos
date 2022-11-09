@@ -33,6 +33,81 @@ public class OrdenVentaGanado extends Orden {
     @OneToOne(mappedBy = "ordenVentaGanadoPrimaria")
     private Imagen imagenPrincipal;
 
+    public OrdenVentaGanado(String titulo, String descripcion, Integer valorInicial, Collection<Raza> razas, Grupo grupoVendedor, Integer pesoMin, Integer pesoMax, Integer pesoPromedio, Boolean transporte, String categoria) {
+        super(titulo, descripcion, valorInicial, razas, categoria);
+        this.grupoVendedor = grupoVendedor;
+        this.pesoMin = pesoMin;
+        this.pesoMax = pesoMax;
+        this.pesoPromedio = pesoPromedio;
+        this.transporte = transporte;
+    }
+
+    public OrdenVentaGanado() {
+    }
+
+    public Grupo getGrupoVendedor() {
+        return grupoVendedor;
+    }
+
+    public void setGrupoVendedor(Grupo grupoVendedor) {
+        this.grupoVendedor = grupoVendedor;
+    }
+
+    public Integer getPesoMin() {
+        return pesoMin;
+    }
+
+    public void setPesoMin(Integer pesoMin) {
+        this.pesoMin = pesoMin;
+    }
+
+    public Integer getPesoMax() {
+        return pesoMax;
+    }
+
+    public void setPesoMax(Integer pesoMax) {
+        this.pesoMax = pesoMax;
+    }
+
+    public Integer getPesoPromedio() {
+        return pesoPromedio;
+    }
+
+    public void setPesoPromedio(Integer pesoPromedio) {
+        this.pesoPromedio = pesoPromedio;
+    }
+
+    public Boolean getTransporte() {
+        return transporte;
+    }
+
+    public void setTransporte(Boolean transporte) {
+        this.transporte = transporte;
+    }
+
+    public Collection<OfertaDeCompra> getOfertasRecibidas() {
+        return ofertasRecibidas;
+    }
+
+    public void setOfertasRecibidas(Collection<OfertaDeCompra> ofertasRecibidas) {
+        this.ofertasRecibidas = ofertasRecibidas;
+    }
+
+    public Imagen getImagenPrincipal() {
+        return imagenPrincipal;
+    }
+
+    public void setImagenPrincipal(Imagen imagenPrincipal) {
+        this.imagenPrincipal = imagenPrincipal;
+    }
+
+    public Collection<Imagen> getImagenesSecundarias() {
+        return imagenesSecundarias;
+    }
+
+    public void setImagenesSecundarias(Collection<Imagen> imagenesSecundarias) {
+        this.imagenesSecundarias = imagenesSecundarias;
+    }
 
     //Imagenes secundarias
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenVentaGanadoSecundarias", fetch = FetchType.EAGER)

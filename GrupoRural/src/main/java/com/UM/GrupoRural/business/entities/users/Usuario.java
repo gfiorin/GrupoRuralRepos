@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -42,7 +43,7 @@ public class Usuario {
     private LocalDate fecha_de_nacimiento;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.LAZY)
-    private Collection<Ubicacion> ubicaciones;
+    private List<Ubicacion> ubicaciones;
 
     @Column(name = "puntuacion", nullable = true)
     private Integer puntuacion;
@@ -172,6 +173,14 @@ public class Usuario {
     }
     public String getDireccion() {
         return direccion;
+    }
+
+    public List<Ubicacion> getUbicaciones() {
+        return ubicaciones;
+    }
+
+    public void setUbicaciones(List<Ubicacion> ubicaciones) {
+        this.ubicaciones = ubicaciones;
     }
 
     public void agregarUbicacion(Ubicacion ub){

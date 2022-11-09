@@ -32,6 +32,15 @@ public class Imagen {
     public Imagen() {
     }
 
+    public Imagen(byte[] imageData, OrdenVentaGanado ordenVentaGanadoPrimaria) {
+        this.imageData = imageData;
+        this.ordenVentaGanadoPrimaria = ordenVentaGanadoPrimaria;
+    }
+    public Imagen(OrdenVentaGanado ordenVentaGanadoSecundarias, byte[] imageData) {
+        this.imageData = imageData;
+        this.ordenVentaGanadoSecundarias = ordenVentaGanadoSecundarias;
+    }
+
     public Imagen(byte[] imageData) {
         this.imageData = imageData;
     }

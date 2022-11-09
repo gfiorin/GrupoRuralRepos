@@ -59,4 +59,8 @@ public class GroupMgr {
 
     }
 
+    public Grupo getGrupoByName(String name){
+        return groupRepository.findByNombre(name);
+    }
+
 }
