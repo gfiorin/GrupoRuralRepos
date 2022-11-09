@@ -165,4 +165,6 @@ public class UserMgr {
         return userRepository.findOneByUsuario(usuario);
     }
 
+    public Productor findProductorByUsuario(String usuario){return productorRepository.findOneByUsuario(usuario);}
+
 }

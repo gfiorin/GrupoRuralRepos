@@ -5,4 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductorRepository extends CrudRepository<Productor, Integer> {}
+public interface ProductorRepository extends CrudRepository<Productor, Integer> {
+    Productor findOneByUsuario(String usuario);
+
+}

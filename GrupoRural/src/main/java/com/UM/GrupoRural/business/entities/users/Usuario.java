@@ -45,7 +45,7 @@ public class Usuario {
     private Collection<Ubicacion> ubicaciones;
 
     @Column(name = "puntuacion", nullable = true)
-    private int puntuacion;
+    private Integer puntuacion;
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Imagen foto_de_perfil;
@@ -81,6 +81,12 @@ public class Usuario {
         this.contrasena = contrasena;
         this.fecha_de_nacimiento = fecha_de_nacimiento;
         this.ubicaciones = new ArrayList<>(5);
+    }
+
+    public Usuario(String usuario, Imagen foto_de_perfil, Integer tipo_de_usuario){
+        this.usuario=usuario;
+        this.foto_de_perfil=foto_de_perfil;
+        this.tipo_de_usuario=tipo_de_usuario;
     }
 
     public Usuario() {
@@ -124,6 +130,14 @@ public class Usuario {
 
     public Collection<Denuncia> getDenunciasRecibidas() {
         return denunciasRecibidas;
+    }
+
+    public Integer getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(Integer puntuacion) {
+        this.puntuacion = puntuacion;
     }
 
     public Integer getTipo_de_usuario() {
