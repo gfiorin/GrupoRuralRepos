@@ -17,6 +17,15 @@ public class OrdenVentaGanado extends Orden {
     @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo")
     private Grupo grupoVendedor;
 
+    @Column(name="peso_min")
+    private Integer pesoMin;
+    @Column(name="peso_max")
+    private Integer pesoMax;
+    @Column(name="peso_promedio")
+    private Integer pesoPromedio;
+    @Column(name="transporte")
+    private Boolean transporte;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenVenta", fetch = FetchType.LAZY)
     private Collection<OfertaDeCompra> ofertasRecibidas;
 

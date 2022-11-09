@@ -47,7 +47,7 @@ public class SignInController {
         }
         usuario.setTipo_de_usuario(is_comprador);
 
-        return ResponseEntity.ok(usuario);
+        return ResponseEntity.ok(new Usuario(usuario.getUsuario(),usuario.getFoto_de_perfil(),  usuario.getTipo_de_usuario()));
 
     }
 }

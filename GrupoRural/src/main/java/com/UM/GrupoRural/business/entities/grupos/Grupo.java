@@ -3,8 +3,10 @@ package com.UM.GrupoRural.business.entities.grupos;
 import com.UM.GrupoRural.business.entities.ofertas.OfertaDeVenta;
 import com.UM.GrupoRural.business.entities.ordenes.OrdenVentaGanado;
 import com.UM.GrupoRural.business.entities.users.Productor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Collection;
 
 @Entity
@@ -31,13 +33,19 @@ public class Grupo {
     @Column(name = "raza_de_vacunos")
     private String raza_de_vacunos;
 
+    @Transient
+    private Float Rating;
+
     @ManyToMany(mappedBy = "grupo", targetEntity = Productor.class)
+    @JsonIgnore
     private Collection<Productor> productores;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoVendedor", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Collection<OrdenVentaGanado> ordenesVenta;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoOfertante", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Collection<OfertaDeVenta> ofertasDeVenta;
 
     public Grupo(String nombre, String motivo_de_grupo, String departamento, String ciudad_pueblo, String raza_de_vacunos) {
@@ -48,7 +56,13 @@ public class Grupo {
         this.raza_de_vacunos = raza_de_vacunos;
     }
 
-    public Grupo() {}
+    public Grupo(Integer idGrupo, String nombre) {
+        this.idGrupo = idGrupo;
+        this.nombre = nombre;
+    }
+
+    public Grupo() {
+    }
 
     public Integer getIdGrupo() {
         return idGrupo;
@@ -84,5 +98,17 @@ public class Grupo {
 
     public Collection<OfertaDeVenta> getOfertasDeVenta() {
         return ofertasDeVenta;
+    }
+
+    public Float getRating(){
+        int RatingSum = 0;
+        int Ratings = 0;
+        for (Productor p:this.productores) {
+            if (p.getPuntuacion()!=null) {
+                RatingSum+=p.getPuntuacion();
+                Ratings++;
+            }
+        }
+        return (Ratings==0) ? null : (float)RatingSum/Ratings;
     }
 }
