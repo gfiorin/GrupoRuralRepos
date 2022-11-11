@@ -1,5 +1,6 @@
 package com.UM.GrupoRural.business.entities.grupos;
 
+import com.UM.GrupoRural.business.entities.Imagen;
 import com.UM.GrupoRural.business.entities.ofertas.OfertaDeVenta;
 import com.UM.GrupoRural.business.entities.ordenes.OrdenVentaGanado;
 import com.UM.GrupoRural.business.entities.users.Productor;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -28,14 +30,17 @@ public class Grupo {
     @Column(name = "motivo_de_grupo", nullable = false)
     private String motivo_de_grupo;
 
-    @Column(name = "departamento")
-    private String departamento;
+    @Column(name = "descripcion")
+    private String descripcion;
 
-    @Column(name = "ciudad_pueblo")
-    private String ciudad_pueblo;
+    @Column(name = "mensaje_invitacion")
+    private String mensaje_invitacion;
 
-    @Column(name = "raza_de_vacunos")
-    private String raza_de_vacunos;
+    @OneToOne(mappedBy = "grupo", cascade = CascadeType.ALL)
+    private Imagen icono;
+
+    @Transient
+    private String imgIcon;
 
     @Column(name="fecha_creacion")
     @CreationTimestamp
@@ -43,6 +48,9 @@ public class Grupo {
 
     @Transient
     private Float Rating;
+
+    @Transient
+    private List<String> nombresInvitados;
 
     @ManyToMany(mappedBy = "grupo", targetEntity = Productor.class)
     @JsonIgnoreProperties("grupo")
@@ -55,20 +63,24 @@ public class Grupo {
     @JsonIgnore
     private Collection<OfertaDeVenta> ofertasDeVenta;
 
-    public Grupo(String nombre, String motivo_de_grupo, String departamento, String ciudad_pueblo, String raza_de_vacunos) {
+    public Grupo(String nombre, String motivo_de_grupo, String descripcion, List<Productor> invitados, String mensaje_invitacion) {
         this.nombre = nombre;
         this.motivo_de_grupo = motivo_de_grupo;
-        this.departamento = departamento;
-        this.ciudad_pueblo = ciudad_pueblo;
-        this.raza_de_vacunos = raza_de_vacunos;
-    }
-
-    public Grupo(Integer idGrupo, String nombre) {
-        this.idGrupo = idGrupo;
-        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.productores = invitados;
+        this.mensaje_invitacion = mensaje_invitacion;
+        this.fechaCreacion = LocalDate.now();
     }
 
     public Grupo() {
+    }
+
+    public String getMensaje_invitacion() {
+        return mensaje_invitacion;
+    }
+
+    public void setMensaje_invitacion(String mensaje_invitacion) {
+        this.mensaje_invitacion = mensaje_invitacion;
     }
 
     public LocalDate getFechaCreacion() {
@@ -87,18 +99,6 @@ public class Grupo {
         return motivo_de_grupo;
     }
 
-    public String getDepartamento() {
-        return departamento;
-    }
-
-    public String getCiudad_pueblo() {
-        return ciudad_pueblo;
-    }
-
-    public String getRaza_de_vacunos() {
-        return raza_de_vacunos;
-    }
-
     public List<Productor> getProductores() {
         return productores;
     }
@@ -111,6 +111,15 @@ public class Grupo {
         return ofertasDeVenta;
     }
 
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     public Float getRating(){
         int RatingSum = 0;
         int Ratings = 0;
@@ -121,5 +130,25 @@ public class Grupo {
             }
         }
         return (Ratings==0) ? null : (float)RatingSum/Ratings;
+    }
+
+    public Imagen getIcono() {
+        return icono;
+    }
+
+    public String getImgIcon() {
+        return imgIcon;
+    }
+
+    public void setIcono(Imagen icono) {
+        this.icono = icono;
+    }
+
+    public List<String> getNombresInvitados() {
+        return nombresInvitados;
+    }
+
+    public void setNombresInvitados(List<String> nombresInvitados) {
+        this.nombresInvitados = nombresInvitados;
     }
 }

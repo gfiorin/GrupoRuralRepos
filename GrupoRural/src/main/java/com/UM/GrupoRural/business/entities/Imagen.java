@@ -1,6 +1,7 @@
 package com.UM.GrupoRural.business.entities;
 
 
+import com.UM.GrupoRural.business.entities.grupos.Grupo;
 import com.UM.GrupoRural.business.entities.ordenes.OrdenVentaGanado;
 import com.UM.GrupoRural.business.entities.users.Usuario;
 
@@ -29,6 +30,10 @@ public class Imagen {
     @JoinColumn(name = "usuario", referencedColumnName = "id_usuario")
     private Usuario usuario;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "grupo", referencedColumnName = "id_grupo")
+    private Grupo grupo;
+
     public Imagen() {
     }
 
@@ -48,6 +53,11 @@ public class Imagen {
     public Imagen(byte[] imageData, Usuario user) {
         this.imageData = imageData;
         this.usuario = user;
+    }
+
+    public Imagen(byte[] imageData, Grupo grupo) {
+        this.imageData = imageData;
+        this.grupo = grupo;
     }
 
     public void setImageData(byte[] imageData) {
