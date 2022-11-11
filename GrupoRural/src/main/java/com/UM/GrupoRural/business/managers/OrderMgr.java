@@ -3,8 +3,10 @@ package com.UM.GrupoRural.business.managers;
 import com.UM.GrupoRural.business.entities.Imagen;
 import com.UM.GrupoRural.business.entities.Ubicacion;
 import com.UM.GrupoRural.business.entities.grupos.Grupo;
+import com.UM.GrupoRural.business.entities.ordenes.OrdenCompraGanado;
 import com.UM.GrupoRural.business.entities.ordenes.OrdenVentaGanado;
 import com.UM.GrupoRural.business.entities.ordenes.Raza;
+import com.UM.GrupoRural.persistence.OrdenCompraGanadoRepository;
 import com.UM.GrupoRural.persistence.OrdenVentaGanadoRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +23,12 @@ public class OrderMgr {
 
     private final OrdenVentaGanadoRepository ordenVentaGanadoRepository;
 
+    private final OrdenCompraGanadoRepository ordenCompraGanadoRepository;
 
-    public OrderMgr(OrdenVentaGanadoRepository ordenVentaGanadoRepository) {
+
+    public OrderMgr(OrdenVentaGanadoRepository ordenVentaGanadoRepository, OrdenCompraGanadoRepository ordenCompraGanadoRepository) {
         this.ordenVentaGanadoRepository = ordenVentaGanadoRepository;
+        this.ordenCompraGanadoRepository = ordenCompraGanadoRepository;
     }
 
     public List<OrdenVentaGanado> getAllOrdenesVenta(){
@@ -55,5 +60,16 @@ public class OrderMgr {
 
 
     }
+
+    @Transactional
+    public void agregarOrdenCompra(String titulo, String categoria, Collection<Raza> razas,
+                                  Integer pesoPromedio, Integer pesoMin, Integer pesoMax, Boolean transporte,
+                                  String descripcion, Ubicacion ubicacion){
+        OrdenCompraGanado ordenCompraGanado = new OrdenCompraGanado(titulo,descripcion,
+                razas,pesoMin,pesoMax,pesoPromedio,transporte, categoria);
+        ordenCompraGanado.setUbicacion(ubicacion);
+        ordenCompraGanadoRepository.save(ordenCompraGanado);
+    }
+
 
 }

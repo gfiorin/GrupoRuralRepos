@@ -4,10 +4,12 @@ import com.UM.GrupoRural.business.entities.ofertas.OfertaDeVenta;
 import com.UM.GrupoRural.business.entities.ordenes.OrdenVentaGanado;
 import com.UM.GrupoRural.business.entities.users.Productor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "grupos")
@@ -37,8 +39,8 @@ public class Grupo {
     private Float Rating;
 
     @ManyToMany(mappedBy = "grupo", targetEntity = Productor.class)
-    @JsonIgnore
-    private Collection<Productor> productores;
+    @JsonIgnoreProperties("grupo")
+    private List<Productor> productores;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoVendedor", fetch = FetchType.LAZY)
     @JsonIgnore
@@ -88,7 +90,7 @@ public class Grupo {
         return raza_de_vacunos;
     }
 
-    public Collection<Productor> getProductores() {
+    public List<Productor> getProductores() {
         return productores;
     }
 

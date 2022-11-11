@@ -37,7 +37,7 @@ public class GetLocationsController {
             }
             return ResponseEntity.ok(ubicaciones);
         }
-        List<Ubicacion> ubicacionList= userMgr.findProductorByUsuario(name).getUbicaciones();
+        List<Ubicacion> ubicacionList= userMgr.findOneByUsuario(name).getUbicaciones();
         return ResponseEntity.ok(ubicacionList);
     }
 }
