@@ -55,6 +55,9 @@ public class OrderMgr {
             }
             ordenVentaGanado.setImagenesSecundarias(listaImagenesSecundarias);
         }
+        for (Raza raza:ordenVentaGanado.getRazas()){
+            raza.setOrdenGanado(ordenVentaGanado);
+        }
         ordenVentaGanadoRepository.save(ordenVentaGanado);
 
 
@@ -68,6 +71,10 @@ public class OrderMgr {
         OrdenCompraGanado ordenCompraGanado = new OrdenCompraGanado(titulo,descripcion,
                 razas,pesoMin,pesoMax,pesoPromedio,transporte, categoria);
         ordenCompraGanado.setUbicacion(ubicacion);
+        for (Raza raza:ordenCompraGanado.getRazas()){
+            raza.setOrdenGanado(ordenCompraGanado);
+            raza.setOrdenGanado(ordenCompraGanado);
+        }
         ordenCompraGanadoRepository.save(ordenCompraGanado);
     }
 
