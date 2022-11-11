@@ -1,5 +1,6 @@
 package com.UM.GrupoRural.business.entities;
 
+import com.UM.GrupoRural.business.entities.ordenes.OrdenVentaGanado;
 import com.UM.GrupoRural.business.entities.users.Usuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -26,7 +27,7 @@ public class Ubicacion {
     private String calle_y_numero;
 
     @ManyToOne(targetEntity = Usuario.class)
-    @JoinColumn(name="usuario", referencedColumnName = "id_usuario", nullable = false)
+    @JoinColumn(name="usuario", referencedColumnName = "id_usuario", nullable = true)
     private Usuario usuario;
 
 
@@ -34,6 +35,11 @@ public class Ubicacion {
     @JoinTable(name = "ubicaciones_lotes", joinColumns = @JoinColumn(name = "id_ubicacion", referencedColumnName = "id_ubicacion"), inverseJoinColumns = @JoinColumn(name = "id_lote_ganado", referencedColumnName = "id_ganado"))
     @JsonIgnore
     private Collection<LoteGanado> lotes;
+
+    @ManyToMany(targetEntity = OrdenVentaGanado.class, fetch = FetchType.LAZY)
+    @JoinTable(name = "ubicaciones_ordenes", joinColumns = @JoinColumn(name = "id_ubicacion", referencedColumnName = "id_ubicacion"), inverseJoinColumns = @JoinColumn(name = "id_orden", referencedColumnName = "id_orden"))
+    @JsonIgnore
+    private Collection<LoteGanado> ordenesVenta;
 
     public Ubicacion() {
     }

@@ -19,7 +19,7 @@ public class OrderVentaCreationController {
     public ResponseEntity<?> registerOrder(@RequestBody OrdenVentaGanado newOrden) {
         orderMgr.agregarOrdenVenta(newOrden.getTitulo(), newOrden.getCategoria(), newOrden.getRazas(), newOrden.getValorInicial(),
                 newOrden.getPesoPromedio(), newOrden.getPesoMin(), newOrden.getPesoMax(), newOrden.getTransporte(), newOrden.getDescripcion(),
-                newOrden.getMainImg(), newOrden.getSecondaryImgs(),newOrden.getGrupoVendedor());
+                newOrden.getMainImg(), newOrden.getSecondaryImgs(),newOrden.getGrupoVendedor(),newOrden.getUbicaciones());
         return ResponseEntity.ok(new MessageResponse("¡Orden registrada correctamente!"));
 
 

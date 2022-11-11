@@ -1,7 +1,9 @@
 package com.UM.GrupoRural.business.entities.ordenes;
 
 import com.UM.GrupoRural.business.entities.Imagen;
+import com.UM.GrupoRural.business.entities.LoteGanado;
 import com.UM.GrupoRural.business.entities.ofertas.OfertaDeVenta;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -105,7 +107,8 @@ public class Orden {
         this.secondaryImgs = secondaryImgs;
     }
 
-    @Column(name = "fecha", nullable = false)
+    @Column(name = "fecha")
+    @CreationTimestamp
     private LocalDateTime fecha;
     @Column(name = "titulo")
     private String titulo;
@@ -123,6 +126,8 @@ public class Orden {
 
     @Column(name="categoria")
     private String categoria;
+
+
 
     public String getCategoria() {
         return categoria;

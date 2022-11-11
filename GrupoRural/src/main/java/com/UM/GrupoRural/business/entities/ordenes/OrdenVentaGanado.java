@@ -1,12 +1,15 @@
 package com.UM.GrupoRural.business.entities.ordenes;
 
 import com.UM.GrupoRural.business.entities.Imagen;
+import com.UM.GrupoRural.business.entities.LoteGanado;
+import com.UM.GrupoRural.business.entities.Ubicacion;
 import com.UM.GrupoRural.business.entities.grupos.Grupo;
 import com.UM.GrupoRural.business.entities.ofertas.OfertaDeCompra;
 import com.UM.GrupoRural.business.entities.users.Productor;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id_orden")
@@ -30,7 +33,7 @@ public class OrdenVentaGanado extends Orden {
     private Collection<OfertaDeCompra> ofertasRecibidas;
 
     //Imagen principal
-    @OneToOne(mappedBy = "ordenVentaGanadoPrimaria")
+    @OneToOne(mappedBy = "ordenVentaGanadoPrimaria", cascade = CascadeType.ALL)
     private Imagen imagenPrincipal;
 
     public OrdenVentaGanado(String titulo, String descripcion, Integer valorInicial, Collection<Raza> razas, Grupo grupoVendedor, Integer pesoMin, Integer pesoMax, Integer pesoPromedio, Boolean transporte, String categoria) {
@@ -113,5 +116,14 @@ public class OrdenVentaGanado extends Orden {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenVentaGanadoSecundarias", fetch = FetchType.EAGER)
     private Collection<Imagen> imagenesSecundarias;
 
+    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "ordenesVenta", targetEntity = Ubicacion.class)
+    private List<Ubicacion> ubicaciones;
 
+    public List<Ubicacion> getUbicaciones() {
+        return ubicaciones;
+    }
+
+    public void setUbicaciones(List<Ubicacion> ubicaciones) {
+        this.ubicaciones = ubicaciones;
+    }
 }
