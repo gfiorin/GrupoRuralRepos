@@ -49,6 +49,10 @@ public class Orden {
         return valorInicial;
     }
 
+    public int getIdOrden() {
+        return idOrden;
+    }
+
     public void setValorInicial(Integer valorInicial) {
         this.valorInicial = valorInicial;
     }

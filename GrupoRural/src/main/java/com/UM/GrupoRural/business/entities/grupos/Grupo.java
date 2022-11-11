@@ -5,9 +5,11 @@ import com.UM.GrupoRural.business.entities.ordenes.OrdenVentaGanado;
 import com.UM.GrupoRural.business.entities.users.Productor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -35,6 +37,10 @@ public class Grupo {
     @Column(name = "raza_de_vacunos")
     private String raza_de_vacunos;
 
+    @Column(name="fecha_creacion")
+    @CreationTimestamp
+    private LocalDate fechaCreacion;
+
     @Transient
     private Float Rating;
 
@@ -43,7 +49,6 @@ public class Grupo {
     private List<Productor> productores;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoVendedor", fetch = FetchType.LAZY)
-    @JsonIgnore
     private Collection<OrdenVentaGanado> ordenesVenta;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoOfertante", fetch = FetchType.LAZY)
@@ -64,6 +69,10 @@ public class Grupo {
     }
 
     public Grupo() {
+    }
+
+    public LocalDate getFechaCreacion() {
+        return fechaCreacion;
     }
 
     public Integer getIdGrupo() {

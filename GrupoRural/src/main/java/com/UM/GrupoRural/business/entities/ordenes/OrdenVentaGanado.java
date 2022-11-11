@@ -6,6 +6,7 @@ import com.UM.GrupoRural.business.entities.Ubicacion;
 import com.UM.GrupoRural.business.entities.grupos.Grupo;
 import com.UM.GrupoRural.business.entities.ofertas.OfertaDeCompra;
 import com.UM.GrupoRural.business.entities.users.Productor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -18,6 +19,7 @@ public class OrdenVentaGanado extends Orden {
 
     @ManyToOne(targetEntity = Grupo.class)
     @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo")
+    @JsonIgnoreProperties("ordenesVenta")
     private Grupo grupoVendedor;
 
     @Column(name="peso_min")
