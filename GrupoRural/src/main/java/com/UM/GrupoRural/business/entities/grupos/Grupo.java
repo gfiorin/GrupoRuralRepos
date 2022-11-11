@@ -52,7 +52,7 @@ public class Grupo {
     @Transient
     private List<String> nombresInvitados;
 
-    @ManyToMany(mappedBy = "grupo", targetEntity = Productor.class)
+    @ManyToMany(mappedBy = "grupo", targetEntity = Productor.class, cascade = CascadeType.ALL)
     @JsonIgnoreProperties("grupo")
     private List<Productor> productores;
 
@@ -63,11 +63,10 @@ public class Grupo {
     @JsonIgnore
     private Collection<OfertaDeVenta> ofertasDeVenta;
 
-    public Grupo(String nombre, String motivo_de_grupo, String descripcion, List<Productor> invitados, String mensaje_invitacion) {
+    public Grupo(String nombre, String motivo_de_grupo, String descripcion, String mensaje_invitacion) {
         this.nombre = nombre;
         this.motivo_de_grupo = motivo_de_grupo;
         this.descripcion = descripcion;
-        this.productores = invitados;
         this.mensaje_invitacion = mensaje_invitacion;
         this.fechaCreacion = LocalDate.now();
     }
@@ -101,6 +100,10 @@ public class Grupo {
 
     public List<Productor> getProductores() {
         return productores;
+    }
+
+    public void setProductores(List<Productor> productores) {
+        this.productores = productores;
     }
 
     public Collection<OrdenVentaGanado> getOrdenesVenta() {

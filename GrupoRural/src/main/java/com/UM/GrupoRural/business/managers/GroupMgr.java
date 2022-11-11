@@ -10,6 +10,7 @@ import com.UM.GrupoRural.persistence.GroupRepository;
 import com.UM.GrupoRural.persistence.ProductorRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -31,6 +32,7 @@ public class GroupMgr {
         this.productorRepository = productorRepository;
     }
 
+    @Transactional
     public void crearGrupo(String nombre_grupo, String motivo_de_grupo, String descripcion, List<String> productores, String mensaje_invitacion, String icono) throws InvalidInformation {
 
         if (nombre_grupo == null || nombre_grupo.isBlank()){
@@ -54,29 +56,30 @@ public class GroupMgr {
         }
 
         List<Productor> invitados = new ArrayList<>(10);
+        Grupo groupToCreate = new Grupo(nombre_grupo, motivo_de_grupo, descripcion, mensaje_invitacion);
 
         for (String productor: productores) {
 
             //Empiezo fijandome que sea productor
             if((!productorRepository.existsProductorByUsuario(productor)) && (!productorRepository.existsProductorByMail(productor))){
-                throw new InvalidInformation(("El usuario " + productor + "no se encuentra registrado en el sistema de productores"));
+                throw new InvalidInformation(("El usuario " + productor + " no se encuentra registrado en el sistema de productores"));
             }
 
             Usuario userByMail = userMgr.findOneByMail(productor);
             Usuario userByUsuario = userMgr.findOneByUsuario(productor);
             if(userByMail == null){
                 if(userByUsuario == null){
-                    throw new InvalidInformation("El usuario " + productor + "no se encuentra registrado en el sistema de productores");
+                    throw new InvalidInformation("El usuario " + productor + " no se encuentra registrado en el sistema de productores");
                 }else{
+                    ( (Productor) userByUsuario).addGrupo(groupToCreate);
                     invitados.add( (Productor) userByUsuario);
                 }
             } else {
+                ((Productor) userByMail).addGrupo(groupToCreate);
                 invitados.add((Productor) userByMail);
             }
 
         }
-
-        Grupo groupToCreate = new Grupo(nombre_grupo, motivo_de_grupo, descripcion, invitados, mensaje_invitacion);
         if (icono!=null){
             icono = icono.split(",")[1];
             groupToCreate.setIcono(new Imagen(Base64.getDecoder().decode(icono.getBytes(StandardCharsets.UTF_8)), groupToCreate));

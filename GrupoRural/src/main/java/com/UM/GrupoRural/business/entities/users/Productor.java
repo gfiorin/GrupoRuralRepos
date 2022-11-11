@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "productores")
 public class Productor extends Usuario {
 
-    @ManyToMany(targetEntity = Grupo.class, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = Grupo.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "grupos_productores", joinColumns = @JoinColumn(name = "id_productor", referencedColumnName = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo"))
     private List<Grupo> grupo;
 
@@ -27,6 +27,11 @@ public class Productor extends Usuario {
 
     public void setGrupo(List<Grupo> grupo) {
         this.grupo = grupo;
+    }
+
+    public void addGrupo(Grupo grupo){
+        if (this.grupo == null) this.grupo=new ArrayList<>();
+        this.grupo.add(grupo);
     }
 
     public Productor(String nombre_completo, String mail, String telefono, String cedula, String usuario, String contrasena, LocalDate fecha_de_nacimiento) {
