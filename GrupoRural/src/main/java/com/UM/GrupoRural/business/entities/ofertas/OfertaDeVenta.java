@@ -3,9 +3,11 @@ package com.UM.GrupoRural.business.entities.ofertas;
 import com.UM.GrupoRural.business.entities.grupos.Grupo;
 import com.UM.GrupoRural.business.entities.Transaccion;
 import com.UM.GrupoRural.business.entities.ordenes.OrdenCompraGanado;
+import org.hibernate.annotations.CreationTimestamp;
 
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "ofertas_venta")
@@ -31,6 +33,10 @@ public class OfertaDeVenta {
     @JoinColumn(name = "id_transaccion", referencedColumnName = "id_transaccion")
     private Transaccion transaccion;
 
+    @Column(name="fecha")
+    @CreationTimestamp
+    private LocalDate fecha;
+
     public Integer getIdOfertaVenta() {
         return idOfertaVenta;
     }
@@ -53,5 +59,13 @@ public class OfertaDeVenta {
 
     public void setOrdenCompra(OrdenCompraGanado ordenCompra) {
         this.ordenCompra = ordenCompra;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 }

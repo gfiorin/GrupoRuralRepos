@@ -57,11 +57,11 @@ public class Grupo {
     private List<Productor> productores;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoVendedor", fetch = FetchType.LAZY)
-    private Collection<OrdenVentaGanado> ordenesVenta;
+    private List<OrdenVentaGanado> ordenesVenta;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoOfertante", fetch = FetchType.LAZY)
     @JsonIgnore
-    private Collection<OfertaDeVenta> ofertasDeVenta;
+    private List<OfertaDeVenta> ofertasDeVenta;
 
     public void agregarOfertaDeVenta(OfertaDeVenta ofertaDeVenta){
         if (this.ofertasDeVenta == null){this.ofertasDeVenta = new ArrayList<>();}
@@ -111,11 +111,11 @@ public class Grupo {
         this.productores = productores;
     }
 
-    public Collection<OrdenVentaGanado> getOrdenesVenta() {
+    public List<OrdenVentaGanado> getOrdenesVenta() {
         return ordenesVenta;
     }
 
-    public Collection<OfertaDeVenta> getOfertasDeVenta() {
+    public List<OfertaDeVenta> getOfertasDeVenta() {
         return ofertasDeVenta;
     }
 

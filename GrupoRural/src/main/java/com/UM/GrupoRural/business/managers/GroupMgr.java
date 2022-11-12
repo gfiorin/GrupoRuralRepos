@@ -2,6 +2,10 @@ package com.UM.GrupoRural.business.managers;
 
 import com.UM.GrupoRural.business.entities.Imagen;
 import com.UM.GrupoRural.business.entities.grupos.Grupo;
+import com.UM.GrupoRural.business.entities.ofertas.OfertaDeCompra;
+import com.UM.GrupoRural.business.entities.ofertas.OfertaDeVenta;
+import com.UM.GrupoRural.business.entities.ordenes.OrdenCompraGanado;
+import com.UM.GrupoRural.business.entities.ordenes.OrdenVentaGanado;
 import com.UM.GrupoRural.business.entities.users.Productor;
 import com.UM.GrupoRural.business.entities.users.Usuario;
 import com.UM.GrupoRural.business.exceptions.InvalidInformation;
@@ -93,4 +97,16 @@ public class GroupMgr {
         return groupRepository.findByNombre(name);
     }
 
+    public Object getOfertasCompra(Integer idGrupo) {
+        Grupo grupo = groupRepository.findOneByIdGrupo(idGrupo);
+        List<OfertaDeCompra> ofertas = new ArrayList<>();
+        for (OrdenVentaGanado ordenVentaGanado: grupo.getOrdenesVenta()){
+            ofertas.addAll(ordenVentaGanado.getOfertasRecibidas());
+        }
+        return ofertas;
+    }
+
+    public List<OfertaDeVenta> getOfertasVenta(Integer idGrupo){
+        return groupRepository.findOneByIdGrupo(idGrupo).getOfertasDeVenta();
+    }
 }
