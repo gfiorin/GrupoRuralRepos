@@ -31,5 +31,27 @@ public class OfertaDeVenta {
     @JoinColumn(name = "id_transaccion", referencedColumnName = "id_transaccion")
     private Transaccion transaccion;
 
+    public Integer getIdOfertaVenta() {
+        return idOfertaVenta;
+    }
 
+    public void setIdOfertaVenta(Integer idOfertaVenta) {
+        this.idOfertaVenta = idOfertaVenta;
+    }
+
+    public Grupo getGrupoOfertante() {
+        return grupoOfertante;
+    }
+
+    public void setGrupoOfertante(Grupo grupoOfertante) {
+        this.grupoOfertante = grupoOfertante;
+    }
+
+    public OrdenCompraGanado getOrdenCompra() {
+        return ordenCompra;
+    }
+
+    public void setOrdenCompra(OrdenCompraGanado ordenCompra) {
+        this.ordenCompra = ordenCompra;
+    }
 }

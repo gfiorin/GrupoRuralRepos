@@ -63,6 +63,10 @@ public class Grupo {
     @JsonIgnore
     private Collection<OfertaDeVenta> ofertasDeVenta;
 
+    public void agregarOfertaDeVenta(OfertaDeVenta ofertaDeVenta){
+        this.ofertasDeVenta.add(ofertaDeVenta);
+    }
+
     public Grupo(String nombre, String motivo_de_grupo, String descripcion, String mensaje_invitacion) {
         this.nombre = nombre;
         this.motivo_de_grupo = motivo_de_grupo;

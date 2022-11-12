@@ -76,6 +76,10 @@ public class OrdenCompraGanado extends Orden {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenCompra", fetch = FetchType.LAZY)
     private Collection<OfertaDeVenta> ofertasRecibidas;
 
+    public void agregarOferta(OfertaDeVenta ofertaDeVenta){
+        this.ofertasRecibidas.add(ofertaDeVenta);
+    }
+
     public String getNombreComprador() {
         return nombreComprador;
     }

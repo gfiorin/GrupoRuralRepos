@@ -154,7 +154,7 @@ public class Orden {
     }
 
     @OneToMany(mappedBy = "ordenGanado", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("ordenGanado")
+    @JsonIgnoreProperties(value = "ordenGanado")
     private Collection<Raza> razas;
 
 
