@@ -5,10 +5,10 @@ import com.UM.GrupoRural.business.entities.users.Usuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "ubicaciones")
 public class Ubicacion {
 
@@ -17,29 +17,29 @@ public class Ubicacion {
     @Column(name = "id_ubicacion", nullable = false)
     private Integer idUbicacion;
 
-    @Column(name = "departamento", nullable = true)
+    @Column(name = "departamento")
     private String departamento;
 
-    @Column(name = "ciudad", nullable = true)
+    @Column(name = "ciudad")
     private String ciudad;
 
-    @Column(name = "calle_y_numero", nullable = true)
+    @Column(name = "calle_y_numero")
     private String calle_y_numero;
 
     @ManyToOne(targetEntity = Usuario.class)
-    @JoinColumn(name="usuario", referencedColumnName = "id_usuario", nullable = true)
+    @JoinColumn(name="usuario", referencedColumnName = "id_usuario")
     private Usuario usuario;
 
 
-    @ManyToMany(targetEntity = LoteGanado.class, fetch = FetchType.LAZY)
+    /*@ManyToMany(targetEntity = LoteGanado.class, fetch = FetchType.LAZY)
     @JoinTable(name = "ubicaciones_lotes", joinColumns = @JoinColumn(name = "id_ubicacion", referencedColumnName = "id_ubicacion"), inverseJoinColumns = @JoinColumn(name = "id_lote_ganado", referencedColumnName = "id_ganado"))
     @JsonIgnore
-    private Collection<LoteGanado> lotes;
+    private Collection<LoteGanado> lotes;*/
 
     @ManyToMany(targetEntity = OrdenVentaGanado.class, fetch = FetchType.LAZY)
     @JoinTable(name = "ubicaciones_ordenes", joinColumns = @JoinColumn(name = "id_ubicacion", referencedColumnName = "id_ubicacion"), inverseJoinColumns = @JoinColumn(name = "id_orden", referencedColumnName = "id_orden"))
     @JsonIgnore
-    private Collection<LoteGanado> ordenesVenta;
+    private Collection<OrdenVentaGanado> ordenesVenta = new ArrayList<>(10);
 
     public Ubicacion() {
     }
@@ -77,4 +77,8 @@ public class Ubicacion {
     public void asociarUsuario(Usuario usuario){
         this.usuario=usuario;
     }
+    public void asociarOrdenVenta(OrdenVentaGanado ordenVentaGanado){
+        this.ordenesVenta.add(ordenVentaGanado);
+    }
+
 }

@@ -42,7 +42,6 @@ public class LoteGanado {
     @Column(name = "observaciones", nullable = true)
     private String observaciones;
 
-    @ManyToMany(mappedBy = "lotes", targetEntity = Ubicacion.class)
-    private Collection<Ubicacion> ubicaciones;
+
 
 }

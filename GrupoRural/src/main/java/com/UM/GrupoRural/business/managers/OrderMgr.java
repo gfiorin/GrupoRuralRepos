@@ -52,6 +52,9 @@ public class OrderMgr {
         OrdenVentaGanado ordenVentaGanado = new OrdenVentaGanado(titulo,descripcion,
                 precio,razas,grupo,pesoMin,pesoMax,pesoPromedio,transporte, categoria);
         ordenVentaGanado.setUbicaciones(ubicaciones);
+        for (Ubicacion ubicacion: ubicaciones) {
+            ubicacion.asociarOrdenVenta(ordenVentaGanado);
+        }
         if (imagenPrincipal!=null){
             imagenPrincipal = imagenPrincipal.split(",")[1];
             Imagen imagenPrincipalEntity = new Imagen(Base64.getDecoder().decode(imagenPrincipal.getBytes(StandardCharsets.UTF_8)),ordenVentaGanado);

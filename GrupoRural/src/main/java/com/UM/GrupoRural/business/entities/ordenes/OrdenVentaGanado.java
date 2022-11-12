@@ -38,6 +38,13 @@ public class OrdenVentaGanado extends Orden {
     @OneToOne(mappedBy = "ordenVentaGanadoPrimaria", cascade = CascadeType.ALL)
     private Imagen imagenPrincipal;
 
+    //Imagenes secundarias
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenVentaGanadoSecundarias", fetch = FetchType.EAGER)
+    private Collection<Imagen> imagenesSecundarias;
+
+    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "ordenesVenta", targetEntity = Ubicacion.class)
+    private List<Ubicacion> ubicaciones;
+
     public OrdenVentaGanado(String titulo, String descripcion, Integer valorInicial, Collection<Raza> razas, Grupo grupoVendedor, Integer pesoMin, Integer pesoMax, Integer pesoPromedio, Boolean transporte, String categoria) {
         super(titulo, descripcion, valorInicial, razas, categoria);
         this.grupoVendedor = grupoVendedor;
@@ -114,12 +121,6 @@ public class OrdenVentaGanado extends Orden {
         this.imagenesSecundarias = imagenesSecundarias;
     }
 
-    //Imagenes secundarias
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenVentaGanadoSecundarias", fetch = FetchType.EAGER)
-    private Collection<Imagen> imagenesSecundarias;
-
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "ordenesVenta", targetEntity = Ubicacion.class)
-    private List<Ubicacion> ubicaciones;
 
     public List<Ubicacion> getUbicaciones() {
         return ubicaciones;
