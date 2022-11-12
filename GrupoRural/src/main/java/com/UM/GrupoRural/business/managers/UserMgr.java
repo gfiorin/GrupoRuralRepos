@@ -167,4 +167,6 @@ public class UserMgr {
 
     public Productor findProductorByUsuario(String usuario){return productorRepository.findOneByUsuario(usuario);}
 
+    public Comprador findCompradorByUsuario(String usuario){return compradorRepository.findOneByUsuario(usuario);}
+
 }

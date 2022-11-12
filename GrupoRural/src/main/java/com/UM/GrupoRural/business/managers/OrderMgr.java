@@ -6,6 +6,8 @@ import com.UM.GrupoRural.business.entities.grupos.Grupo;
 import com.UM.GrupoRural.business.entities.ordenes.OrdenCompraGanado;
 import com.UM.GrupoRural.business.entities.ordenes.OrdenVentaGanado;
 import com.UM.GrupoRural.business.entities.ordenes.Raza;
+import com.UM.GrupoRural.business.entities.users.Comprador;
+import com.UM.GrupoRural.persistence.CompradorRepository;
 import com.UM.GrupoRural.persistence.OrdenCompraGanadoRepository;
 import com.UM.GrupoRural.persistence.OrdenVentaGanadoRepository;
 import org.springframework.stereotype.Service;
@@ -25,10 +27,13 @@ public class OrderMgr {
 
     private final OrdenCompraGanadoRepository ordenCompraGanadoRepository;
 
+    private final CompradorRepository compradorRepository;
 
-    public OrderMgr(OrdenVentaGanadoRepository ordenVentaGanadoRepository, OrdenCompraGanadoRepository ordenCompraGanadoRepository) {
+
+    public OrderMgr(OrdenVentaGanadoRepository ordenVentaGanadoRepository, OrdenCompraGanadoRepository ordenCompraGanadoRepository, CompradorRepository compradorRepository) {
         this.ordenVentaGanadoRepository = ordenVentaGanadoRepository;
         this.ordenCompraGanadoRepository = ordenCompraGanadoRepository;
+        this.compradorRepository = compradorRepository;
     }
 
     public List<OrdenVentaGanado> getAllOrdenesVenta(){
@@ -67,14 +72,23 @@ public class OrderMgr {
     @Transactional
     public void agregarOrdenCompra(String titulo, String categoria, Collection<Raza> razas,
                                   Integer pesoPromedio, Integer pesoMin, Integer pesoMax, Boolean transporte,
-                                  String descripcion, Ubicacion ubicacion){
+                                  String descripcion, Ubicacion ubicacion, String comprador) throws Exception {
         OrdenCompraGanado ordenCompraGanado = new OrdenCompraGanado(titulo,descripcion,
                 razas,pesoMin,pesoMax,pesoPromedio,transporte, categoria);
         ordenCompraGanado.setUbicacion(ubicacion);
+        Comprador miComprador;
+        try{
+            miComprador = compradorRepository.findOneByUsuario(comprador);
+            miComprador.agregarOrden(ordenCompraGanado);
+
+        }catch (Exception e){
+            throw new Exception("El usuario " + comprador + " no existe");
+        }
         for (Raza raza:ordenCompraGanado.getRazas()){
             raza.setOrdenGanado(ordenCompraGanado);
             raza.setOrdenGanado(ordenCompraGanado);
         }
+        ordenCompraGanado.setCompradorGanado(miComprador);
         ordenCompraGanadoRepository.save(ordenCompraGanado);
     }
 

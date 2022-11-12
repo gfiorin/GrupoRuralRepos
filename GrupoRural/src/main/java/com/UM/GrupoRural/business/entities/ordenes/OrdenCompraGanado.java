@@ -3,6 +3,8 @@ package com.UM.GrupoRural.business.entities.ordenes;
 import com.UM.GrupoRural.business.entities.Ubicacion;
 import com.UM.GrupoRural.business.entities.ofertas.OfertaDeVenta;
 import com.UM.GrupoRural.business.entities.users.Comprador;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -11,6 +13,9 @@ import java.util.Collection;
 @PrimaryKeyJoinColumn(name = "id_orden")
 @Table(name = "ordenes_compra_ganado")
 public class OrdenCompraGanado extends Orden {
+
+    @Transient
+    private String nombreComprador;
 
     @Column(name="peso_min")
     private Integer pesoMin;
@@ -64,10 +69,26 @@ public class OrdenCompraGanado extends Orden {
 
     @ManyToOne(targetEntity = Comprador.class)
     @JoinColumn(name = "id_comprador", referencedColumnName = "id_usuario")
+    @JsonIgnore
     private Comprador compradorGanado;
 
     //Una orden de compra tiene ofertas de venta por parte de los productores
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenCompra", fetch = FetchType.LAZY)
     private Collection<OfertaDeVenta> ofertasRecibidas;
 
+    public String getNombreComprador() {
+        return nombreComprador;
+    }
+
+    public void setNombreComprador(String nombreComprador) {
+        this.nombreComprador = nombreComprador;
+    }
+
+    public Comprador getCompradorGanado() {
+        return compradorGanado;
+    }
+
+    public void setCompradorGanado(Comprador compradorGanado) {
+        this.compradorGanado = compradorGanado;
+    }
 }
