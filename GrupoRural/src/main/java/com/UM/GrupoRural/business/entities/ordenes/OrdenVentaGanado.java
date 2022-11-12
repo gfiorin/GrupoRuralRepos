@@ -9,6 +9,7 @@ import com.UM.GrupoRural.business.entities.users.Productor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class OrdenVentaGanado extends Orden {
     @Column(name="transporte")
     private Boolean transporte;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenVenta", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "ordenVenta", fetch = FetchType.LAZY)
     private Collection<OfertaDeCompra> ofertasRecibidas;
 
     //Imagen principal
@@ -128,5 +129,10 @@ public class OrdenVentaGanado extends Orden {
 
     public void setUbicaciones(List<Ubicacion> ubicaciones) {
         this.ubicaciones = ubicaciones;
+    }
+
+    public void agregarOferta(OfertaDeCompra oferta) {
+        if (this.ofertasRecibidas==null) this.ofertasRecibidas = new ArrayList<>();
+        this.ofertasRecibidas.add(oferta);
     }
 }

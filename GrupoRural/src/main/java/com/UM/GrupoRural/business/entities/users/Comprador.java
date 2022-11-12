@@ -8,6 +8,7 @@ import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class Comprador extends Usuario {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compradorOfertante", fetch = FetchType.LAZY)
     @JsonIgnore
-    private Collection<OfertaDeCompra> ofertasDeCompra;
+    private List<OfertaDeCompra> ofertasDeCompra;
 
     public Comprador(String nombre_completo, String mail, String telefono, String cedula, String usuario, String contrasena, LocalDate fecha_de_nacimiento) {
         super(nombre_completo, mail, telefono, cedula, usuario, contrasena, fecha_de_nacimiento);
@@ -43,5 +44,14 @@ public class Comprador extends Usuario {
 
     public void agregarOrden(OrdenCompraGanado orden){
         this.odenesDeCompra.add(orden);
+    }
+
+    public void agregarOferta(OfertaDeCompra oferta) {
+        if (this.ofertasDeCompra == null) this.ofertasDeCompra= new ArrayList<>();
+        this.ofertasDeCompra.add(oferta);
+    }
+
+    public List<OfertaDeCompra> getOfertasDeCompra() {
+        return this.ofertasDeCompra;
     }
 }
