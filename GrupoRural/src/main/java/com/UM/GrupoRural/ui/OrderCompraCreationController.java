@@ -20,7 +20,7 @@ public class OrderCompraCreationController {
     public ResponseEntity<?> registerOrder(@RequestBody OrdenCompraGanado newOrden) {
         try {
             orderMgr.agregarOrdenCompra(newOrden.getTitulo(), newOrden.getCategoria(), newOrden.getRazas(),
-                    newOrden.getPesoPromedio(), newOrden.getPesoMin(), newOrden.getPesoMax(), newOrden.getTransporte(), newOrden.getDescripcion(),newOrden.getUbicacion(), newOrden.getNombreComprador());
+                    newOrden.getPesoPromedio(), newOrden.getPesoMin(), newOrden.getPesoMax(), newOrden.getTransporte(), newOrden.getDescripcion(),newOrden.getUbicacion(), newOrden.getNombreComprador(),newOrden.getValorInicial());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
         }

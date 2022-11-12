@@ -40,6 +40,11 @@ public class OrderMgr {
         return (List<OrdenVentaGanado>) ordenVentaGanadoRepository.findAll();
     }
 
+    public List<OrdenCompraGanado> getAllOrdenesCompra(){
+        return (List<OrdenCompraGanado>) ordenCompraGanadoRepository.findAll();
+    }
+
+
     @Transactional
     public void agregarOrdenVenta(String titulo, String categoria, Collection<Raza> razas, Integer precio,
                                   Integer pesoPromedio, Integer pesoMin, Integer pesoMax, Boolean transporte,
@@ -72,9 +77,10 @@ public class OrderMgr {
     @Transactional
     public void agregarOrdenCompra(String titulo, String categoria, Collection<Raza> razas,
                                   Integer pesoPromedio, Integer pesoMin, Integer pesoMax, Boolean transporte,
-                                  String descripcion, Ubicacion ubicacion, String comprador) throws Exception {
+                                  String descripcion, Ubicacion ubicacion, String comprador, Integer valorInicial) throws Exception {
+
         OrdenCompraGanado ordenCompraGanado = new OrdenCompraGanado(titulo,descripcion,
-                razas,pesoMin,pesoMax,pesoPromedio,transporte, categoria);
+                razas,pesoMin,pesoMax,pesoPromedio,transporte, categoria, valorInicial);
         ordenCompraGanado.setUbicacion(ubicacion);
         Comprador miComprador;
         try{
