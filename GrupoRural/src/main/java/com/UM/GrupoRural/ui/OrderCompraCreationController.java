@@ -19,7 +19,7 @@ public class OrderCompraCreationController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> registerOrder(@RequestBody OrdenCompraGanado newOrden) {
         orderMgr.agregarOrdenCompra(newOrden.getTitulo(), newOrden.getCategoria(), newOrden.getRazas(),
-                newOrden.getPesoPromedio(), newOrden.getPesoMin(), newOrden.getPesoMax(), newOrden.getTransporte(), newOrden.getDescripcion(),newOrden.getUbicacion());
+                newOrden.getPesoPromedio(), newOrden.getPesoMin(), newOrden.getPesoMax(), newOrden.getTransporte(), newOrden.getDescripcion(),newOrden.getUbicacion(), newOrden.getValorInicial());
         return ResponseEntity.ok(new MessageResponse("¡Orden registrada correctamente!"));
 
 

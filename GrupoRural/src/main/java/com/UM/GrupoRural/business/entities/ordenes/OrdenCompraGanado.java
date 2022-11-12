@@ -22,8 +22,8 @@ public class OrdenCompraGanado extends Orden {
     @Column(name="transporte")
     private Boolean transporte;
 
-    public OrdenCompraGanado(String titulo, String descripcion, Collection<Raza> razas, Integer pesoMin, Integer pesoMax, Integer pesoPromedio, Boolean transporte, String categoria) {
-        super(titulo, descripcion, 0, razas, categoria);
+    public OrdenCompraGanado(String titulo, String descripcion, Collection<Raza> razas, Integer pesoMin, Integer pesoMax, Integer pesoPromedio, Boolean transporte, String categoria, Integer valorInicial) {
+        super(titulo, descripcion, valorInicial, razas, categoria);
         this.pesoMin=pesoMin;
         this.pesoMax=pesoMax;
         this.pesoPromedio=pesoPromedio;
