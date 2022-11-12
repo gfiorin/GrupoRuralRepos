@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Table(name = "ofertas_compra")
 public class OfertaDeCompra {
 
-    public enum Estado{PENDIENTE, ACEPTADA, ENCAMINO, CANCELADA, ENCTREGADA}
+    public enum Estado{PENDIENTE, ACEPTADA, ENCAMINO, CANCELADA, ENTREGADA}
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,7 +30,7 @@ public class OfertaDeCompra {
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "enum('PENDIENTE','ACEPTADA','ENCAMINO', 'CANCELADA', 'ENTREGADA') default 'PENDIENTE'")
-    private Orden.Estado estado;
+    private Estado estado;
 
     //Tiene un comprador que oferta
     @ManyToOne(targetEntity = Comprador.class, cascade = CascadeType.ALL)
@@ -49,11 +49,11 @@ public class OfertaDeCompra {
     @JoinColumn(name = "id_transaccion", referencedColumnName = "id_transaccion")
     private Transaccion transaccion;
 
-    public Orden.Estado getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(Orden.Estado estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 

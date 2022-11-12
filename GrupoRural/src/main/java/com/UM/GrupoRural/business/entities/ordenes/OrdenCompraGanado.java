@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -77,6 +78,7 @@ public class OrdenCompraGanado extends Orden {
     private Collection<OfertaDeVenta> ofertasRecibidas;
 
     public void agregarOferta(OfertaDeVenta ofertaDeVenta){
+        if (this.ofertasRecibidas==null) this.ofertasRecibidas = new ArrayList<>();
         this.ofertasRecibidas.add(ofertaDeVenta);
     }
 

@@ -53,4 +53,13 @@ public class OfertaMgr {
         ofertaDeVentaRepository.save(newOferta);
 
     }
+
+    @Transactional
+    public void updateEstadoOfertaCompra(Integer id, String estado) throws Exception {
+        OfertaDeCompra.Estado nuevoEstado = OfertaDeCompra.Estado.valueOf(estado);
+        OfertaDeCompra oferta = ofertaDeCompraRepository.findByIdOfertaCompra(id);
+        if (oferta==null){throw new Exception("ERROR: No se encontró la oferta");}
+        oferta.setEstado(nuevoEstado);
+        ofertaDeCompraRepository.save(oferta);
+    }
 }

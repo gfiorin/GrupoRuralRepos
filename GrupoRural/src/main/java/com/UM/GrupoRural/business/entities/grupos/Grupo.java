@@ -64,6 +64,7 @@ public class Grupo {
     private Collection<OfertaDeVenta> ofertasDeVenta;
 
     public void agregarOfertaDeVenta(OfertaDeVenta ofertaDeVenta){
+        if (this.ofertasDeVenta == null){this.ofertasDeVenta = new ArrayList<>();}
         this.ofertasDeVenta.add(ofertaDeVenta);
     }
 
