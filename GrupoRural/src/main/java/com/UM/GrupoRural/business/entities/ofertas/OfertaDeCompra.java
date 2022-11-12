@@ -1,7 +1,6 @@
 package com.UM.GrupoRural.business.entities.ofertas;
 
 import com.UM.GrupoRural.business.entities.Transaccion;
-import com.UM.GrupoRural.business.entities.ordenes.Orden;
 import com.UM.GrupoRural.business.entities.ordenes.OrdenVentaGanado;
 import com.UM.GrupoRural.business.entities.users.Comprador;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
