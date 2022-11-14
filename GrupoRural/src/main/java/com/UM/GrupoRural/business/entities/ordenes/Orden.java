@@ -4,6 +4,7 @@ import com.UM.GrupoRural.business.entities.Imagen;
 import com.UM.GrupoRural.business.entities.LoteGanado;
 import com.UM.GrupoRural.business.entities.ofertas.OfertaDeVenta;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -156,8 +157,6 @@ public class Orden {
     @OneToMany(mappedBy = "ordenGanado", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("ordenGanado")
     private Collection<Raza> razas;
-
-
 
 
 }
