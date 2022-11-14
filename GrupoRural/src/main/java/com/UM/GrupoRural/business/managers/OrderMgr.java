@@ -44,6 +44,9 @@ public class OrderMgr {
         return (List<OrdenCompraGanado>) ordenCompraGanadoRepository.findAll();
     }
 
+    public List<OrdenVentaGanado> getAllOrdenesVentaMenosUna(Integer idOrden){
+        return (List<OrdenVentaGanado>) ordenVentaGanadoRepository.findByIdOrdenNot(idOrden);
+    }
 
     @Transactional
     public void agregarOrdenVenta(String titulo, String categoria, Collection<Raza> razas, Integer precio,
